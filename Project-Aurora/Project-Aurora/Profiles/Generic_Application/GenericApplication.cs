@@ -40,8 +40,9 @@ namespace Aurora.Profiles.Generic_Application
         }
 
         public GenericApplication(string process_name)
-            : base(new LightEventConfig { Name="Generic Application", ID=process_name, ProcessNames= new[] { process_name }, SettingsType = typeof(GenericApplicationSettings), ProfileType= typeof(GenericApplicationProfile), OverviewControlType= typeof(Control_GenericApplication), GameStateType= typeof(GameState), Event= new Event_GenericApplication() })
+            : base(new LightEventConfig { Name="Generic Application", ID=process_name, ProcessNames= new[] { process_name }, SettingsType = typeof(GenericApplicationSettings), ProfileType= typeof(GenericApplicationProfile), OverviewControlType= typeof(Control_GenericApplication), GameStateType= typeof(GameState_Wrapper), Event= new Event_GenericApplication() })
         {
+            Global.logger.Debug("Process: " + process_name);
             Config.ExtraAvailableLayers.Add("WrapperLights");
         }
 

@@ -13,7 +13,7 @@ namespace Aurora.Profiles
     {
         public WrapperProfile() : base()
         {
-
+            Global.logger.Debug("Wrapper Profile Base");
         }
 
         [OnDeserialized]

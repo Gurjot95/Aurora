@@ -22,13 +22,15 @@ namespace Aurora.Profiles
 
         public override void UpdateLights(EffectFrame frame)
         {
+            Global.logger.Debug("Update Lights");
             Queue<EffectLayer> layers = new Queue<EffectLayer>();
             ApplicationProfile settings = this.Application.Profile;
-            
-            foreach (var layer in Application.Profile.Layers.Reverse().ToArray())
-            {
-                if (layer.Enabled && layer.LogicPass)
+
+            foreach (var layer in Application.Profile.Layers.Reverse().ToArray()) {
+                if (layer.Enabled && layer.LogicPass) {
+                  
                     layers.Enqueue(layer.Render(_game_state));
+                }
             }
 
             frame.AddLayers(layers.ToArray());
@@ -36,9 +38,12 @@ namespace Aurora.Profiles
 
         public override void SetGameState(IGameState new_game_state)
         {
-            if (this.Application.Config.GameStateType != null && !new_game_state.GetType().Equals(this.Application.Config.GameStateType))
-                return;
 
+            if (this.Application.Config.GameStateType != null && !new_game_state.GetType().Equals(this.Application.Config.GameStateType)) {
+              
+                return;
+            }
+            
             _game_state = new_game_state;
             UpdateLayerGameStates();
         }
@@ -46,11 +51,15 @@ namespace Aurora.Profiles
         private void UpdateLayerGameStates()
         {
             ApplicationProfile settings = this.Application.Profile;
-            if (settings == null)
+            if (settings == null) {
+                Global.logger.Debug("Setting null");
                 return;
+            }
 
-            foreach (Layer lyr in settings.Layers)
+            foreach (Layer lyr in settings.Layers) {
+            
                 lyr.SetGameState(_game_state);
+            }
         }
 
         public override void ResetGameState()
