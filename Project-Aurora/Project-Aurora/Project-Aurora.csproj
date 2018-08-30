@@ -1219,6 +1219,9 @@
     <Resource Include="Resources\mc_clock_day.png" />
     <Resource Include="Resources\mc_clock_night.png" />
     <Resource Include="Resources\kf2.png" />
+    <Resource Include="Resources\doom_256x256.png" />
+    <Resource Include="Resources\factorio_64x64.png" />
+    <Resource Include="Resources\quakechampions_195x195.png" />
     <Content Include="wooting-rgb-sdk.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
