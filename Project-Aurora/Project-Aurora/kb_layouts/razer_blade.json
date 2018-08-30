@@ -514,7 +514,7 @@
   },
   "included_features": [
     "razer_blade_left_bottom_features.json",
-    "razer_blade_right_bottom_features.json",
+    
     "razer_blade_right_features.json"
   ]
 }
