@@ -481,7 +481,7 @@ namespace Aurora.Devices.LightFX
 
 
                         if (key.Key == DeviceKeys.Peripheral_Logo) {
-
+                            //setColor(0, TouchPad, key.Value.R, key.Value.G, key.Value.B);
                             setColor(1, AlienFrontLogo, key.Value.R, key.Value.G, key.Value.B);
                             if (!HID) {
                                 color.red = key.Value.R;

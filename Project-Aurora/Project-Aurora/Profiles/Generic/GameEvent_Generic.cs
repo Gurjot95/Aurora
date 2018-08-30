@@ -22,7 +22,6 @@ namespace Aurora.Profiles
 
         public override void UpdateLights(EffectFrame frame)
         {
-            Global.logger.Debug("Update Lights");
             Queue<EffectLayer> layers = new Queue<EffectLayer>();
             ApplicationProfile settings = this.Application.Profile;
 
