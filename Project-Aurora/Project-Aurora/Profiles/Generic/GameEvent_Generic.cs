@@ -51,12 +51,10 @@ namespace Aurora.Profiles
         {
             ApplicationProfile settings = this.Application.Profile;
             if (settings == null) {
-                Global.logger.Debug("Setting null");
                 return;
             }
 
             foreach (Layer lyr in settings.Layers) {
-            
                 lyr.SetGameState(_game_state);
             }
         }
