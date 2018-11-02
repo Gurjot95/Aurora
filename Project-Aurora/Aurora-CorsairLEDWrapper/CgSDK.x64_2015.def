@@ -1,0 +1,17 @@
+EXPORTS
+CgSdkClearAllEvents
+CgSdkClearAllStates
+CgSdkClearState
+CgSdkClearStateWithKey
+CgSdkGetLastError
+CgSdkHideProgressBar
+CgSdkPerformProtocolHandshake
+CgSdkReleaseControl
+CgSdkRequestControl
+CgSdkSetEvent
+CgSdkSetEventWithKey
+CgSdkSetGame
+CgSdkSetProgressBarValue
+CgSdkSetState
+CgSdkSetStateWithKey
+CgSdkShowProgressBar
