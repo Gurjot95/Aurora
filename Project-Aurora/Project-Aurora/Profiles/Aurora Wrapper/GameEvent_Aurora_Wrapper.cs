@@ -417,19 +417,7 @@ namespace Aurora.Profiles.Aurora_Wrapper
             }
         }
         string corsairGame = "";
-        public void SwitchToCorsairProfile(String gameName, String name)
-        {
 
-            Global.logger.Debug("Switching");
-            string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\corsair_profiles\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
-            String filename = Path.Combine(directoryName, name + ".json"); Global.logger.Debug("Profiless: " + filename);
-            // this.Settings.SelectedProfile = Path.GetFileNameWithoutExtension(filename); Global.logger.Debug("Profile: " + filename);
-            //App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
-            //Profile.PropertyChanged += Profile_PropertyChanged;
-
-            //  App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
-
-        }
         public new bool IsEnabled
         {
             get { return Global.Configuration.allow_all_logitech_bitmaps; }

@@ -86,7 +86,6 @@ namespace Aurora.Settings
             lstProfiles.Items.SortDescriptions.Add(
             new System.ComponentModel.SortDescription("ProfileName",
             System.ComponentModel.ListSortDirection.Ascending));
-           
             this.lstProfiles.SelectedItem = this.FocusedApplication?.Profiles.First((profile) => System.IO.Path.GetFileNameWithoutExtension(profile.ProfileFilepath).Equals(this.FocusedApplication?.Settings.SelectedProfile));
         }
 
@@ -100,7 +99,7 @@ namespace Aurora.Settings
                         throw new ArgumentException($"Items contained in the ListView must be of type 'ProfileSettings', not '{lstProfiles.SelectedItem.GetType()}'");
 
                     this.FocusedApplication?.SwitchToProfile(lstProfiles.SelectedItem as ApplicationProfile);
-                  
+
                     ProfileSelected?.Invoke(lstProfiles.SelectedItem as ApplicationProfile);
                     this.btnDeleteProfile.IsEnabled = true;
                 }
@@ -515,7 +514,7 @@ namespace Aurora.Settings
                                                                 {
                                                                     float time = float.Parse(transition.Element("time").Value);
                                                                     System.Drawing.Color color = System.Drawing.ColorTranslator.FromHtml(transition.Element("color").Value);
-                                                                 
+
                                                                     transitions.SetColorAt(time, color);
 
                                                                     if (time < smallest)
