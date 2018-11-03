@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Aurora.EffectsEngine;
 using System.Drawing;
+using System.Reflection;
+using System.IO;
 
 namespace Aurora.Profiles.Aurora_Wrapper
 {
@@ -74,7 +76,7 @@ namespace Aurora.Profiles.Aurora_Wrapper
             Devices.DeviceKeys[] allkeys = Enum.GetValues(typeof(Devices.DeviceKeys)).Cast<Devices.DeviceKeys>().ToArray();
             foreach (var key in allkeys)
             {
-                if(extra_keys.ContainsKey(key))
+                if (extra_keys.ContainsKey(key))
                     bitmap_layer.Set(key, GetBoostedColor(extra_keys[key]));
                 else
                 {
@@ -142,7 +144,7 @@ namespace Aurora.Profiles.Aurora_Wrapper
 
                 GameState_Wrapper ngw_state = (new_game_state as GameState_Wrapper);
 
-                if(ngw_state.Sent_Bitmap.Length != 0)
+                if (ngw_state.Sent_Bitmap.Length != 0)
                     bitmap = ngw_state.Sent_Bitmap;
 
                 SetExtraKey(Devices.DeviceKeys.LOGO, ngw_state.Extra_Keys.logo);
@@ -357,8 +359,27 @@ namespace Aurora.Profiles.Aurora_Wrapper
                 {
                     current_effect = null;
                 }
+                //Corsair
+                else if (ngw_state.Command.Equals("CorsGame"))
+                {
+                    Global.logger.Debug("CommandGame: " + ngw_state.Command);
+                    corsairGame = ngw_state.Command;
+                }
+                else if (ngw_state.Command.Equals("CorsState"))
+                {
+                    Global.logger.Debug("CommandState: " + ngw_state.Command_Data.effect_config + " |: "+ Global.LightingStateManager);
+                  
+                    (Global.LightingStateManager.DesktopProfile as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+
+                }
+                else if (ngw_state.Command.Equals("CorsEvent"))
+                {
+                    Global.logger.Debug("CommandEvent: " + ngw_state.Command_Data.effect_config);
+
+                    (Global.LightingStateManager.DesktopProfile as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                }
                 //Razer
-                else if(ngw_state.Command.Equals("CreateMouseEffect"))
+                else if (ngw_state.Command.Equals("CreateMouseEffect"))
                 {
 
                 }
@@ -395,7 +416,20 @@ namespace Aurora.Profiles.Aurora_Wrapper
                 }
             }
         }
+        string corsairGame = "";
+        public void SwitchToCorsairProfile(String gameName, String name)
+        {
 
+            Global.logger.Debug("Switching");
+            string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\corsair_profiles\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
+            String filename = Path.Combine(directoryName, name + ".json"); Global.logger.Debug("Profiless: " + filename);
+            // this.Settings.SelectedProfile = Path.GetFileNameWithoutExtension(filename); Global.logger.Debug("Profile: " + filename);
+            //App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
+            //Profile.PropertyChanged += Profile_PropertyChanged;
+
+            //  App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
+
+        }
         public new bool IsEnabled
         {
             get { return Global.Configuration.allow_all_logitech_bitmaps; }

@@ -156,6 +156,21 @@ namespace Aurora.Profiles
             }
         }
 
+        public void SwitchToCorsairProfile(String gameName, String name)
+        {
+
+            Global.logger.Debug("Switching in app: " + gameName);
+            string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "corsair_profiles" + "\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
+            String filename = Path.Combine(directoryName, GetValidFilename(name) + ".json"); Global.logger.Debug("Profiless: " + filename);
+            SwitchToProfile(LoadProfile(filename));
+            // this.Profiles.Add(CreateNewProfile(name));
+            //  this.Settings.SelectedProfile = Path.GetFileNameWithoutExtension(filename); 
+            // Profile.PropertyChanged += Profile_PropertyChanged;
+
+            // App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
+
+        }
+
         protected virtual ApplicationProfile CreateNewProfile(string profileName)
         {
             ApplicationProfile profile = (ApplicationProfile)Activator.CreateInstance(Config.ProfileType);
@@ -520,7 +535,8 @@ namespace Aurora.Profiles
             }
         }
 
-        public void ForceScriptReload() {
+        public void ForceScriptReload()
+        {
             LoadScripts(GetProfileFolderPath(), true);
         }
 
@@ -652,7 +668,8 @@ namespace Aurora.Profiles
         {
             base.LoadSettings(settingsType);
 
-            this.Settings.PropertyChanged += (sender, e) => {
+            this.Settings.PropertyChanged += (sender, e) =>
+            {
                 SaveSettings(Config.SettingsType);
             };
         }

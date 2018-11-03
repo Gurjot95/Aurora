@@ -1,0 +1,18 @@
+﻿{
+  "$type": "Aurora.Profiles.Desktop.DesktopProfile, Aurora",
+  "ProfileName": "FC_Down",
+  "TriggerKeybind": {
+    "$type": "Aurora.Settings.Keybind, Aurora",
+    "_AssignedKeys": {
+      "$type": "System.Collections.Generic.Queue`1[[System.Windows.Forms.Keys, System.Windows.Forms]], System",
+      "$values": []
+    }
+  },
+  "ScriptSettings": {
+    "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Aurora.Settings.ScriptSettings, Aurora]], mscorlib"
+  },
+  "Layers": {
+    "$type": "System.Collections.ObjectModel.ObservableCollection`1[[Aurora.Settings.Layers.Layer, Aurora]], System",
+    "$values": []
+  }
+}

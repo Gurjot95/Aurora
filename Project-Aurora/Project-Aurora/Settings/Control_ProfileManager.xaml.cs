@@ -86,7 +86,7 @@ namespace Aurora.Settings
             lstProfiles.Items.SortDescriptions.Add(
             new System.ComponentModel.SortDescription("ProfileName",
             System.ComponentModel.ListSortDirection.Ascending));
-            this.lstProfiles.SelectedItem = this.FocusedApplication?.Profiles.First((profile) => System.IO.Path.GetFileNameWithoutExtension(profile.ProfileFilepath).Equals(this.FocusedApplication?.Settings.SelectedProfile));
+           // this.lstProfiles.SelectedItem = this.FocusedApplication?.Profiles.First((profile) => System.IO.Path.GetFileNameWithoutExtension(profile.ProfileFilepath).Equals(this.FocusedApplication?.Settings.SelectedProfile));
         }
 
         private void lstProfiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -514,7 +514,7 @@ namespace Aurora.Settings
                                                                 {
                                                                     float time = float.Parse(transition.Element("time").Value);
                                                                     System.Drawing.Color color = System.Drawing.ColorTranslator.FromHtml(transition.Element("color").Value);
-
+                                                                 
                                                                     transitions.SetColorAt(time, color);
 
                                                                     if (time < smallest)
