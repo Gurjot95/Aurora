@@ -86,7 +86,8 @@ namespace Aurora.Settings
             lstProfiles.Items.SortDescriptions.Add(
             new System.ComponentModel.SortDescription("ProfileName",
             System.ComponentModel.ListSortDirection.Ascending));
-           // this.lstProfiles.SelectedItem = this.FocusedApplication?.Profiles.First((profile) => System.IO.Path.GetFileNameWithoutExtension(profile.ProfileFilepath).Equals(this.FocusedApplication?.Settings.SelectedProfile));
+           
+            this.lstProfiles.SelectedItem = this.FocusedApplication?.Profiles.First((profile) => System.IO.Path.GetFileNameWithoutExtension(profile.ProfileFilepath).Equals(this.FocusedApplication?.Settings.SelectedProfile));
         }
 
         private void lstProfiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -99,7 +100,7 @@ namespace Aurora.Settings
                         throw new ArgumentException($"Items contained in the ListView must be of type 'ProfileSettings', not '{lstProfiles.SelectedItem.GetType()}'");
 
                     this.FocusedApplication?.SwitchToProfile(lstProfiles.SelectedItem as ApplicationProfile);
-
+                  
                     ProfileSelected?.Invoke(lstProfiles.SelectedItem as ApplicationProfile);
                     this.btnDeleteProfile.IsEnabled = true;
                 }

@@ -159,13 +159,14 @@ namespace Aurora.Profiles
         public void SwitchToCorsairProfile(String gameName, String name)
         {
 
-            Global.logger.Debug("Switching in app: " + gameName);
-            string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "corsair_profiles" + "\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
-            String filename = Path.Combine(directoryName, GetValidFilename(name) + ".json"); Global.logger.Debug("Profiless: " + filename);
+            //Global.logger.Debug("Switching in app: " + gameName);
+            // string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "corsair_profiles" + "\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
+            //String filename = Path.Combine(directoryName, GetValidFilename(name) + ".json"); 
+            String filename = Path.Combine(GetProfileFolderPath(), GetValidFilename(name) + ".json"); 
             SwitchToProfile(LoadProfile(filename));
             // this.Profiles.Add(CreateNewProfile(name));
-            //  this.Settings.SelectedProfile = Path.GetFileNameWithoutExtension(filename); 
-            // Profile.PropertyChanged += Profile_PropertyChanged;
+            this.Settings.SelectedProfile = Path.GetFileNameWithoutExtension(filename);
+            Profile.PropertyChanged += Profile_PropertyChanged;
 
             // App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
 

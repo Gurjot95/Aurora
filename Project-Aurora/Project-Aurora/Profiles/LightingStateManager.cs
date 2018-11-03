@@ -143,7 +143,8 @@ namespace Aurora.Profiles
                 new Factorio.Factorio(),
                 new QuakeChampions.QuakeChampions(),
                 new Diablo3.Diablo3(),
-                new DeadCells.DeadCells()
+                new DeadCells.DeadCells(),
+                new FarCry5.FarCry5()
             });
 
             RegisterLayerHandlers(new List<LayerHandlerEntry> {

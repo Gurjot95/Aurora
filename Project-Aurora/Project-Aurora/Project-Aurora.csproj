@@ -435,6 +435,10 @@
       <DependentUpon>Control_Diablo3.xaml</DependentUpon>
     </Compile>
     <Compile Include="Profiles\Diablo3\Diablo3Application.cs" />
+    <Compile Include="Profiles\Far Cry 5\Control_FarCry5.xaml.cs">
+      <DependentUpon>Control_FarCry5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profiles\Far Cry 5\FarCry5Application.cs" />
     <Compile Include="Profiles\Minecraft\GSI\Nodes\GameNode.cs" />
     <Compile Include="Profiles\Minecraft\Layers\Control_MinecraftKeyConflictLayer.xaml.cs">
       <DependentUpon>Control_MinecraftKeyConflictLayer.xaml</DependentUpon>
@@ -819,56 +823,6 @@
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="corsair_profiles\FarCry5\FCHOD_Day.json" />
-    <None Include="corsair_profiles\FarCry5\FCHOD_Liberty.json" />
-    <None Include="corsair_profiles\FarCry5\FCHOD_Menu.json" />
-    <None Include="corsair_profiles\FarCry5\FC_AnimalAttack.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="corsair_profiles\FarCry5\FC_Arcade.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="corsair_profiles\FarCry5\FC_ArcadeCoin.json" />
-    <None Include="corsair_profiles\FarCry5\FC_ArcadeMenu.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Bees.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Benchmark.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Bliss.json" />
-    <None Include="corsair_profiles\FarCry5\FC_CrouchDay.json" />
-    <None Include="corsair_profiles\FarCry5\FC_CrouchNight.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Cutscene.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Day.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Death.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Down.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Drug.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Drunk.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Equip.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Explosion.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Fire.json" />
-    <None Include="corsair_profiles\FarCry5\FC_FireFlag.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Fish.json" />
-    <None Include="corsair_profiles\FarCry5\FC_FlightDay.json" />
-    <None Include="corsair_profiles\FarCry5\FC_FlightNight.json" />
-    <None Include="corsair_profiles\FarCry5\FC_FlyRaceCheckpoint.json" />
-    <None Include="corsair_profiles\FarCry5\FC_FlyRaceCheckpointOld.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Liberty.json" />
-    <None Include="corsair_profiles\FarCry5\FC_LibertyBlue %281%29.json" />
-    <None Include="corsair_profiles\FarCry5\FC_LibertyBlue.json" />
-    <None Include="corsair_profiles\FarCry5\FC_LibertyFlag.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Melee.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Menu.json" />
-    <None Include="corsair_profiles\FarCry5\FC_MPLoss.json" />
-    <None Include="corsair_profiles\FarCry5\FC_MPWin.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Night.json" />
-    <None Include="corsair_profiles\FarCry5\FC_NightLight.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Psychedelic.json" />
-    <None Include="corsair_profiles\FarCry5\FC_RaceCheckpoint.json" />
-    <None Include="corsair_profiles\FarCry5\FC_RaceCheckpointOld.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Shoot.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Skunk.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Spotted.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Takedown.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Underwater.json" />
-    <None Include="corsair_profiles\FarCry5\FC_Water.json" />
     <None Include="kb_layouts\asus_strix_flare.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1348,6 +1302,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\deadcells_128x128.png" />
+    <Resource Include="Resources\FarCry5_128x128.png" />
     <Content Include="wooting-rgb-sdk.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1569,6 +1524,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Profiles\Diablo3\Control_Diablo3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Profiles\Far Cry 5\Control_FarCry5.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -2161,7 +2120,8 @@
     <Error Condition="!Exists('..\packages\CUE.NET.1.2.0.1\build\net45\CUE.NET.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CUE.NET.1.2.0.1\build\net45\CUE.NET.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>XCOPY "$(SolutionDir)Project-Aurora\corsair_profiles" "$(TargetDir)corsair_profiles\" /s /i /y</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 

@@ -373,6 +373,25 @@ namespace Aurora.Settings.Layers
             {
                 current_effect = null;
             }
+            //Corsair
+            else if (ngw_state.Command.Equals("CorsGame"))
+            {
+                //Global.logger.Debug("WrapperHandler CommandGame: " + ngw_state.Command_Data.effect_config);
+                corsairGame = ngw_state.Command_Data.effect_config;
+            }
+            else if (ngw_state.Command.Equals("CorsState"))
+            {
+                //Global.logger.Debug("WrapperHandler CommandState: " + ngw_state.Command_Data.effect_config + " |: " + Global.LightingStateManager.GetCurrentProfile());
+
+                (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+
+            }
+            else if (ngw_state.Command.Equals("CorsEvent"))
+            {
+                //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
+
+                (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+            }
             //Razer
             else if (ngw_state.Command.Equals("CreateMouseEffect"))
             {
@@ -410,7 +429,7 @@ namespace Aurora.Settings.Layers
                 Global.logger.Info("Unknown Wrapper Command: " + ngw_state.Command);
             }
         }
-
+        string corsairGame = "";
         public float[] RgbToHsv(Color colorRgb)
         {
             float R = colorRgb.R / 255.0f;

@@ -362,21 +362,21 @@ namespace Aurora.Profiles.Aurora_Wrapper
                 //Corsair
                 else if (ngw_state.Command.Equals("CorsGame"))
                 {
-                    Global.logger.Debug("CommandGame: " + ngw_state.Command);
-                    corsairGame = ngw_state.Command;
+                    //Global.logger.Debug("CommandGame: " + ngw_state.Command_Data.effect_config);
+                    corsairGame = ngw_state.Command_Data.effect_config;
                 }
                 else if (ngw_state.Command.Equals("CorsState"))
                 {
-                    Global.logger.Debug("CommandState: " + ngw_state.Command_Data.effect_config + " |: "+ Global.LightingStateManager);
+                    //Global.logger.Debug("CommandState: " + ngw_state.Command_Data.effect_config + " |: "+ Global.LightingStateManager);
                   
-                    (Global.LightingStateManager.DesktopProfile as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                    (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
 
                 }
                 else if (ngw_state.Command.Equals("CorsEvent"))
                 {
-                    Global.logger.Debug("CommandEvent: " + ngw_state.Command_Data.effect_config);
+                    //Global.logger.Debug("CommandEvent: " + ngw_state.Command_Data.effect_config);
 
-                    (Global.LightingStateManager.DesktopProfile as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                    (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
                 }
                 //Razer
                 else if (ngw_state.Command.Equals("CreateMouseEffect"))
