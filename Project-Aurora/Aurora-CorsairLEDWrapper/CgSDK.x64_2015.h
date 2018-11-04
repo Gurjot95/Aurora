@@ -49,11 +49,11 @@ extern "C"
 
 	CORSAIR_GAME_SDK bool CgSdkSetState(char *gamename);
 
-	CORSAIR_GAME_SDK bool CgSdkSetStateWithKey();
+	CORSAIR_GAME_SDK bool CgSdkSetStateWithKey(char *gamename);
 
 	CORSAIR_GAME_SDK bool CgSdkSetEvent(char *gamename);
 
-	CORSAIR_GAME_SDK bool CgSdkSetEventWithKey();
+	CORSAIR_GAME_SDK bool CgSdkSetEventWithKey(char *gamename);
 
 	CORSAIR_GAME_SDK bool CgSdkSetProgressBarValue();
 
@@ -61,9 +61,9 @@ extern "C"
 
 	CORSAIR_GAME_SDK bool CgSdkHideProgressBar();
 
-	CORSAIR_GAME_SDK bool CgSdkClearState();
+	CORSAIR_GAME_SDK bool CgSdkClearState(char *gamename);
 
-	CORSAIR_GAME_SDK bool CgSdkClearStateWithKey();
+	CORSAIR_GAME_SDK bool CgSdkClearStateWithKey(char *gamename);
 
 	CORSAIR_GAME_SDK bool CgSdkClearAllStates();
 

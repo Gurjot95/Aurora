@@ -392,6 +392,18 @@ namespace Aurora.Settings.Layers
 
                 (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
             }
+            else if (ngw_state.Command.Equals("CorsClearState"))
+            {
+                //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
+
+                (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, "default");
+            }
+            else if (ngw_state.Command.Equals("CorsClearAllEvents"))
+            {
+                //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
+
+                (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, "default");
+            }
             //Razer
             else if (ngw_state.Command.Equals("CreateMouseEffect"))
             {
