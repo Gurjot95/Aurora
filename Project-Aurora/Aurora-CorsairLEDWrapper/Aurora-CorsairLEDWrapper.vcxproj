@@ -27,7 +27,9 @@
   <ItemGroup>
     <ClCompile Include="Aurora-CorsairLEDWrapper.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

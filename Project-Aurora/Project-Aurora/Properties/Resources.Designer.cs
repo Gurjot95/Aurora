@@ -169,19 +169,7 @@ namespace Aurora.Properties {
                 return ((byte[])(obj));
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] Aurora_CorsairLedWrapper
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Aurora_CorsairLedWrapper", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
