@@ -388,7 +388,6 @@ namespace Aurora.Settings.Layers
                 {
                     CurrentApp(gamestate).ActiveCorsairProfiles().Remove(profileName);
                 }
-                CurrentApp(gamestate).ActiveCorsairProfiles().Add(profileName);
                 CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, profileName);
 
             }
@@ -399,7 +398,7 @@ namespace Aurora.Settings.Layers
                 // stopWatch.Start();
                 // TimeSpan ts = stopWatch.Elapsed;
 
-                CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                //CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
                 //long elapsedTime = stopWatch.ElapsedMilliseconds;
             }
             else if (ngw_state.Command.Equals("CorsClearState"))
@@ -417,7 +416,7 @@ namespace Aurora.Settings.Layers
                     {
                         loadLastProfile = CurrentApp(gamestate).ActiveCorsairProfiles()[CurrentApp(gamestate).ActiveCorsairProfiles().Count() - 1];
                     }
-                    Global.logger.Debug("Corsair SwitchTo: " + loadLastProfile);
+                    Global.logger.Debug("Corsair SwitchToLast: " + loadLastProfile);
                     CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, loadLastProfile);
                 }
                 else

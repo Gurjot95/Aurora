@@ -207,6 +207,7 @@ namespace Aurora.Profiles
                     // Profile.PropertyChanged += Profile_PropertyChanged;
 
                     App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
+                    ActiveCorsairProfiles().Add(name);
                 }
 
             }
