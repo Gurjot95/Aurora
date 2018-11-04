@@ -183,7 +183,7 @@ namespace Aurora.Profiles
                 // string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "corsair_profiles" + "\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
                 //String filename = Path.Combine(directoryName, GetValidFilename(name) + ".json"); 
 
-                String filename = Path.Combine(GetCorsairProfileFolderPath(gameName), GetValidFilename(name) + ".json");
+                String filename = Path.Combine(GetProfileFolderPath(), GetValidFilename(name) + ".json");
                 Global.logger.Debug("FileName: " + filename + " |Game Name: " + gameName);
                 //SwitchToProfile();
                 ApplicationProfile newProfileSettings = LoadProfile(filename);
