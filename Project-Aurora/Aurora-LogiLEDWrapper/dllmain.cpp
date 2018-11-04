@@ -10,7 +10,7 @@
 #define PIPE_NAME L"\\\\.\\pipe\\Aurora\\server" 
 
 HANDLE hPipe;
-static bool isInitialized = false;
+static bool isInitialized = false; 
 
 static unsigned char current_bitmap[LOGI_LED_BITMAP_SIZE];
 static unsigned char current_bg[3];
