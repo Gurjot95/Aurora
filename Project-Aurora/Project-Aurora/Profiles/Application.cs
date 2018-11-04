@@ -17,6 +17,7 @@ using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Serialization;
 using System.Collections.ObjectModel;
 using Aurora.Settings;
+using System.Collections;
 
 namespace Aurora.Profiles
 {
@@ -155,10 +156,16 @@ namespace Aurora.Profiles
                 App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
             }
         }
+        List<String> CorsairProfiles = new List<String>();
+
+        public List<String> GetCorsairActiveProfiles()
+        {
+            return CorsairProfiles;
+        }
+
 
         public void SwitchToCorsairProfile(String gameName, String name)
         {
-
             //Global.logger.Debug("Switching in app: " + gameName);
             // string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "corsair_profiles" + "\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
             //String filename = Path.Combine(directoryName, GetValidFilename(name) + ".json"); 
@@ -177,8 +184,8 @@ namespace Aurora.Profiles
                 }
 
                 Profile = newProfileSettings;
-                this.Settings.SelectedProfile = Path.GetFileNameWithoutExtension(Profile.ProfileFilepath);
-                Profile.PropertyChanged += Profile_PropertyChanged;
+                this.Settings.SelectedProfile = name;
+               // Profile.PropertyChanged += Profile_PropertyChanged;
 
                 App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
             }

@@ -91,7 +91,7 @@ namespace Aurora.Settings.Layers
             Devices.DeviceKeys[] allkeys = Enum.GetValues(typeof(Devices.DeviceKeys)).Cast<Devices.DeviceKeys>().ToArray();
             foreach (var key in allkeys)
             {
-                if(extra_keys.ContainsKey(key))
+                if (extra_keys.ContainsKey(key))
                     bitmap_layer.Set(key, GetBoostedColor(extra_keys[key]));
                 else
                 {
@@ -382,8 +382,14 @@ namespace Aurora.Settings.Layers
             else if (ngw_state.Command.Equals("CorsState"))
             {
                 //Global.logger.Debug("WrapperHandler CommandState: " + ngw_state.Command_Data.effect_config + " |: " + Global.LightingStateManager.GetCurrentProfile());
-
-                (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                Application CurrentProfile = (Global.LightingStateManager.GetCurrentProfile() as Application);
+                String profileName = ngw_state.Command_Data.effect_config;
+                if (CurrentProfile.GetCorsairActiveProfiles().Contains(profileName))
+                {
+                    CurrentProfile.GetCorsairActiveProfiles().Remove(profileName);
+                }
+                CurrentProfile.GetCorsairActiveProfiles().Add(profileName);
+                CurrentProfile.SwitchToCorsairProfile(corsairGame, profileName);
 
             }
             else if (ngw_state.Command.Equals("CorsEvent"))
@@ -396,13 +402,32 @@ namespace Aurora.Settings.Layers
             {
                 //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
 
-                (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, "default");
+                String ProfileToRemove = ngw_state.Command_Data.effect_config;
+                Application CurrentProfile = (Global.LightingStateManager.GetCurrentProfile() as Application);
+                String active = CurrentProfile.GetCorsairActiveProfiles()[CurrentProfile.GetCorsairActiveProfiles().Count() - 1];
+                Global.logger.Debug("Corsair Active: " + active);
+                if (active.Equals(ProfileToRemove))
+                {
+                    CurrentProfile.GetCorsairActiveProfiles().Remove(ProfileToRemove);
+                    String activeProfile = "default";
+                    if (CurrentProfile.GetCorsairActiveProfiles().Count() > 0)
+                    {
+                        activeProfile = CurrentProfile.GetCorsairActiveProfiles()[CurrentProfile.GetCorsairActiveProfiles().Count() - 1];
+                    }
+                 
+                    CurrentProfile.SwitchToCorsairProfile(corsairGame, activeProfile);
+                }
+                else
+                    CurrentProfile.GetCorsairActiveProfiles().Remove(ProfileToRemove);
+
+
             }
-            else if (ngw_state.Command.Equals("CorsClearAllEvents"))
+            else if (ngw_state.Command.Equals("CorsClearAllStates"))
             {
                 //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
-
-                (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, "default");
+                Application CurrentProfile = (Global.LightingStateManager.GetCurrentProfile() as Application);
+                CurrentProfile.GetCorsairActiveProfiles().Clear();
+                CurrentProfile.SwitchToCorsairProfile(corsairGame, "default");
             }
             //Razer
             else if (ngw_state.Command.Equals("CreateMouseEffect"))
