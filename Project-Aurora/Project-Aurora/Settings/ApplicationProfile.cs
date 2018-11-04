@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Aurora.Settings
@@ -107,6 +108,26 @@ namespace Aurora.Settings
             _ScriptSettings = new Dictionary<string, Aurora.Settings.ScriptSettings>();
             _triggerKeybind = new Keybind();
         }
+
+        /// <summary>
+        /// Helper function that returns a list of all AnimationLayerHandlers that are currently visible.
+        /// </summary>
+        private IEnumerable<AnimationLayerHandler> VisibleAnimationLayerHandlers => Layers
+            .Where(layer => layer.Enabled) // Only include visible layers
+            .Where(layer => layer.Handler is AnimationLayerHandler) // Check if animation layers
+            .Select(layer => layer.Handler as AnimationLayerHandler); // Return the handler
+
+        /// <summary>
+        /// Returns the highest value of the durations of any animation layers in this profile. Default to 0 if there are none.
+        /// </summary>
+        public float MaxVisibleAnimationLayerDuration => VisibleAnimationLayerHandlers
+            .Max(handler => handler.Properties._AnimationDuration) ?? 0;
+
+        /// <summary>
+        /// Returns a boolean indicating whether all animation layers in this profile have a duration of exactly 1.
+        /// </summary>
+        public bool AllAnimationLayersDuration1 => VisibleAnimationLayerHandlers
+            .All(handler => handler.Properties._AnimationDuration == 1); // Return true if all durations are 1
 
         public virtual void Dispose()
         {

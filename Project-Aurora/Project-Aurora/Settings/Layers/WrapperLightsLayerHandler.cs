@@ -6,6 +6,8 @@ using System.Drawing;
 using Aurora.Profiles;
 using System.Windows.Controls;
 using Newtonsoft.Json;
+using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace Aurora.Settings.Layers
 {
@@ -376,58 +378,59 @@ namespace Aurora.Settings.Layers
             //Corsair
             else if (ngw_state.Command.Equals("CorsGame"))
             {
-                //Global.logger.Debug("WrapperHandler CommandGame: " + ngw_state.Command_Data.effect_config);
+                Global.logger.Debug("WrapperHandler CommandGame: " + ngw_state.Command_Data.effect_config);
                 corsairGame = ngw_state.Command_Data.effect_config;
             }
             else if (ngw_state.Command.Equals("CorsState"))
             {
-                //Global.logger.Debug("WrapperHandler CommandState: " + ngw_state.Command_Data.effect_config + " |: " + Global.LightingStateManager.GetCurrentProfile());
-                Application CurrentProfile = (Global.LightingStateManager.GetCurrentProfile() as Application);
                 String profileName = ngw_state.Command_Data.effect_config;
-                if (CurrentProfile.GetCorsairActiveProfiles().Contains(profileName))
+                if (CurrentApp(gamestate).ActiveCorsairProfiles().Contains(profileName))
                 {
-                    CurrentProfile.GetCorsairActiveProfiles().Remove(profileName);
+                    CurrentApp(gamestate).ActiveCorsairProfiles().Remove(profileName);
                 }
-                CurrentProfile.GetCorsairActiveProfiles().Add(profileName);
-                CurrentProfile.SwitchToCorsairProfile(corsairGame, profileName);
+                CurrentApp(gamestate).ActiveCorsairProfiles().Add(profileName);
+                CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, profileName);
 
             }
             else if (ngw_state.Command.Equals("CorsEvent"))
             {
-                //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
+                Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
+                // Stopwatch stopWatch = new Stopwatch();
+                // stopWatch.Start();
+                // TimeSpan ts = stopWatch.Elapsed;
 
-                (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                //long elapsedTime = stopWatch.ElapsedMilliseconds;
             }
             else if (ngw_state.Command.Equals("CorsClearState"))
             {
                 //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
 
                 String ProfileToRemove = ngw_state.Command_Data.effect_config;
-                Application CurrentProfile = (Global.LightingStateManager.GetCurrentProfile() as Application);
-                String active = CurrentProfile.GetCorsairActiveProfiles()[CurrentProfile.GetCorsairActiveProfiles().Count() - 1];
+                String active = CurrentApp(gamestate).ActiveCorsairProfiles()[CurrentApp(gamestate).ActiveCorsairProfiles().Count() - 1];
                 Global.logger.Debug("Corsair Active: " + active);
                 if (active.Equals(ProfileToRemove))
                 {
-                    CurrentProfile.GetCorsairActiveProfiles().Remove(ProfileToRemove);
-                    String activeProfile = "default";
-                    if (CurrentProfile.GetCorsairActiveProfiles().Count() > 0)
+                    CurrentApp(gamestate).ActiveCorsairProfiles().Remove(ProfileToRemove);
+                    String loadLastProfile = "default";
+                    if (CurrentApp(gamestate).ActiveCorsairProfiles().Count() > 0)
                     {
-                        activeProfile = CurrentProfile.GetCorsairActiveProfiles()[CurrentProfile.GetCorsairActiveProfiles().Count() - 1];
+                        loadLastProfile = CurrentApp(gamestate).ActiveCorsairProfiles()[CurrentApp(gamestate).ActiveCorsairProfiles().Count() - 1];
                     }
-                 
-                    CurrentProfile.SwitchToCorsairProfile(corsairGame, activeProfile);
+                    Global.logger.Debug("Corsair SwitchTo: " + loadLastProfile);
+                    CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, loadLastProfile);
                 }
                 else
-                    CurrentProfile.GetCorsairActiveProfiles().Remove(ProfileToRemove);
+                    CurrentApp(gamestate).ActiveCorsairProfiles().Remove(ProfileToRemove);
 
 
             }
             else if (ngw_state.Command.Equals("CorsClearAllStates"))
             {
                 //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
-                Application CurrentProfile = (Global.LightingStateManager.GetCurrentProfile() as Application);
-                CurrentProfile.GetCorsairActiveProfiles().Clear();
-                CurrentProfile.SwitchToCorsairProfile(corsairGame, "default");
+
+                CurrentApp(gamestate).ActiveCorsairProfiles().Clear();
+                CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, "default");
             }
             //Razer
             else if (ngw_state.Command.Equals("CreateMouseEffect"))
@@ -466,7 +469,15 @@ namespace Aurora.Settings.Layers
                 Global.logger.Info("Unknown Wrapper Command: " + ngw_state.Command);
             }
         }
-        string corsairGame = "";
+        static string corsairGame = "";
+
+        public Application CurrentApp(IGameState gameState)
+        {
+            JObject provider = Newtonsoft.Json.Linq.JObject.Parse(gameState.GetNode("provider"));
+            string name = provider.GetValue("name").ToString().ToLowerInvariant();
+           return (Global.LightingStateManager.GetProfileFromProcessName(name) as Application);
+        }
+
         public float[] RgbToHsv(Color colorRgb)
         {
             float R = colorRgb.R / 255.0f;

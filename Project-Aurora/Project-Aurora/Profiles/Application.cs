@@ -158,7 +158,7 @@ namespace Aurora.Profiles
         }
         List<String> CorsairProfiles = new List<String>();
 
-        public List<String> GetCorsairActiveProfiles()
+        public List<String> ActiveCorsairProfiles()
         {
             return CorsairProfiles;
         }
@@ -166,28 +166,53 @@ namespace Aurora.Profiles
 
         public void SwitchToCorsairProfile(String gameName, String name)
         {
-            //Global.logger.Debug("Switching in app: " + gameName);
-            // string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "corsair_profiles" + "\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
-            //String filename = Path.Combine(directoryName, GetValidFilename(name) + ".json"); 
-            String filename = Path.Combine(GetProfileFolderPath(), GetValidFilename(name) + ".json");
-            //SwitchToProfile();
-            ApplicationProfile newProfileSettings = LoadProfile(filename);
-            if (Disposed)
-                return;
-
-            if (newProfileSettings != null && Profile != newProfileSettings)
+            try
             {
-                if (Profile != null)
+                if (String.IsNullOrEmpty(gameName))
                 {
-                    //this.SaveProfile();
-                    Profile.PropertyChanged -= Profile_PropertyChanged;
+                    Global.logger.Debug("Null Game: " + name);
+                    return;
                 }
 
-                Profile = newProfileSettings;
-                this.Settings.SelectedProfile = name;
-               // Profile.PropertyChanged += Profile_PropertyChanged;
+                if (this.Settings.SelectedProfile.Equals(name))
+                {
+                    Global.logger.Debug("Profile Already Loaded: " + name);
+                    return;
+                }
+                //Global.logger.Debug("Switching in app: " + gameName);
+                // string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + "corsair_profiles" + "\\" + gameName + "\\"; Global.logger.Debug("Direct: " + directoryName);
+                //String filename = Path.Combine(directoryName, GetValidFilename(name) + ".json"); 
 
-                App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
+                String filename = Path.Combine(GetCorsairProfileFolderPath(gameName), GetValidFilename(name) + ".json");
+                Global.logger.Debug("FileName: " + filename + " |Game Name: " + gameName);
+                //SwitchToProfile();
+                ApplicationProfile newProfileSettings = LoadProfile(filename);
+                if (newProfileSettings.AllAnimationLayersDuration1)
+                {
+
+                }
+                if (Disposed)
+                    return;
+
+                if (newProfileSettings != null && Profile != newProfileSettings)
+                {
+                    if (Profile != null)
+                    {
+                        //this.SaveProfile();
+                        Profile.PropertyChanged -= Profile_PropertyChanged;
+                    }
+
+                    Profile = newProfileSettings;
+                    this.Settings.SelectedProfile = name;
+                    // Profile.PropertyChanged += Profile_PropertyChanged;
+
+                    App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
+                }
+
+            }
+            catch (Exception e)
+            {
+                Global.logger.Warn("Switching to Corsair Porfile Error: " + e);
             }
 
         }

@@ -52,11 +52,11 @@ namespace Aurora.Profiles.FarCry5
             {
                 this.InstallWrapper(dialog.SelectedPath);
 
-                MessageBox.Show("Aurora Wrapper Patch for Razer applied to\r\n" + dialog.SelectedPath);
+                MessageBox.Show("Aurora Wrapper Patch for Corsair applied to\r\n" + dialog.SelectedPath);
             }
         }
 
-        private int GameID = 427520;
+        private int GameID = 552520;
 
         private bool InstallWrapper(string installpath = "")
         {
@@ -66,14 +66,10 @@ namespace Aurora.Profiles.FarCry5
 
             if (!String.IsNullOrWhiteSpace(installpath))
             {
-                using (BinaryWriter razer_wrapper_86 = new BinaryWriter(new FileStream(System.IO.Path.Combine(installpath, "bin" ,"x64" , "RzChromaSDK.dll"), FileMode.Create)))
-                {
-                    razer_wrapper_86.Write(Properties.Resources.Aurora_RazerLEDWrapper86);
-                }
 
-                using (BinaryWriter razer_wrapper_64 = new BinaryWriter(new FileStream(System.IO.Path.Combine(installpath, "bin", "x64" , "RzChromaSDK64.dll"), FileMode.Create)))
+                using (BinaryWriter corsair_wrapper_64 = new BinaryWriter(new FileStream(System.IO.Path.Combine(installpath, "CgSDK.x64_2015.dll"), FileMode.Create)))
                 {
-                    razer_wrapper_64.Write(Properties.Resources.Aurora_RazerLEDWrapper64);
+                    corsair_wrapper_64.Write(Properties.Resources.Aurora_CorsairLEDWrapper);
                 }
 
                 return true;
@@ -89,8 +85,8 @@ namespace Aurora.Profiles.FarCry5
             String installpath = Utils.SteamUtils.GetGamePath(this.GameID);
             if (!String.IsNullOrWhiteSpace(installpath))
             {
-                string path = System.IO.Path.Combine(installpath, "bin", "x64", "RzChromaSDK.dll");
-                string path64 = System.IO.Path.Combine(installpath, "bin", "x64", "RzChromaSDK64.dll");
+                string path = System.IO.Path.Combine(installpath, "CgSDK.x64_2015.dll");
+                string path64 = System.IO.Path.Combine(installpath, "CgSDK.x64_2015.dll");
 
                 if (File.Exists(path))
                     File.Delete(path);

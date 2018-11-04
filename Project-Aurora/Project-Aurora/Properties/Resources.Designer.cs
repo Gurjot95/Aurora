@@ -81,6 +81,16 @@ namespace Aurora.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Aurora_CorsairLEDWrapper {
+            get {
+                object obj = ResourceManager.GetObject("Aurora_CorsairLEDWrapper", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon aurora_icon {
@@ -159,7 +169,19 @@ namespace Aurora.Properties {
                 return ((byte[])(obj));
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Aurora_CorsairLedWrapper
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Aurora_CorsairLedWrapper", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
