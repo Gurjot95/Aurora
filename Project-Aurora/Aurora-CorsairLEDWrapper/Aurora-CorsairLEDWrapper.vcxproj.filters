@@ -39,4 +39,17 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CgSDK.x64_2015.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="CgSDK.x64_2015.exp">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="CgSDK.x64_2015.lib">
+      <Filter>Source Files</Filter>
+    </Library>
+  </ItemGroup>
 </Project>
