@@ -14,7 +14,7 @@ namespace Aurora.Profiles.FarCry5
         public FarCry5()
             : base(new LightEventConfig { Name = "FarCry5", ID = "FarCry5", ProcessNames = new[] { "FarCry5.exe"}, ProfileType = typeof(WrapperProfile), OverviewControlType = typeof(Control_FarCry5), GameStateType = typeof(GameState_Wrapper), Event = new GameEvent_Generic(), IconURI = "Resources/FarCry5_128x128.png" })
         {
-            Config.ExtraAvailableLayers.Add("WrapperLights");
+            Config.ExtraAvailableLayers.Add("WrapperLights"); 
         }
     }
 }
