@@ -69,7 +69,7 @@ namespace Aurora.Profiles.FarCry5
 
                 using (BinaryWriter corsair_wrapper_64 = new BinaryWriter(new FileStream(System.IO.Path.Combine(installpath, "CgSDK.x64_2015.dll"), FileMode.Create)))
                 {
-                    corsair_wrapper_64.Write(Properties.Resources.Aurora_CorsairLEDWrapper);
+                    corsair_wrapper_64.Write(Properties.Resources.Aurora_CorsairWrapper);
                 }
 
                 return true;

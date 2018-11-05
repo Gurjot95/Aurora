@@ -15,41 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CgSDK.x64_2015.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CgSDK.x64_2015Global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CgSDK.x64_2015.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CgSDK.x64_2015Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Aurora-CorsairLEDWrapper.cpp">
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora-CorsairWrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CgSDK.x64_2015.def">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="CgSDK.x64_2015.exp">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="CgSDK.x64_2015.lib">
-      <Filter>Source Files</Filter>
-    </Library>
   </ItemGroup>
 </Project>
