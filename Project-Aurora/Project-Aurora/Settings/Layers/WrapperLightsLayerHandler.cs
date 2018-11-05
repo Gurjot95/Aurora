@@ -405,7 +405,7 @@ namespace Aurora.Settings.Layers
             {
                 //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
 
-                String ProfileToRemove = ngw_state.Command_Data.effect_config;
+                String ProfileToRemove = ngw_state.Command_Data.effect_config; 
                 String active = CurrentApp(gamestate).ActiveCorsairProfiles()[CurrentApp(gamestate).ActiveCorsairProfiles().Count() - 1];
                 Global.logger.Debug("Corsair Active: " + active);
                 if (active.Equals(ProfileToRemove))
