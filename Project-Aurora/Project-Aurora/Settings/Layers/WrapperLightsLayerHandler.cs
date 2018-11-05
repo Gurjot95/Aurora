@@ -398,7 +398,7 @@ namespace Aurora.Settings.Layers
                 // stopWatch.Start();
                 // TimeSpan ts = stopWatch.Elapsed;
 
-                //CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
                 //long elapsedTime = stopWatch.ElapsedMilliseconds;
             }
             else if (ngw_state.Command.Equals("CorsClearState"))
