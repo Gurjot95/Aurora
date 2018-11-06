@@ -369,14 +369,14 @@ namespace Aurora.Profiles.Aurora_Wrapper
                 {
                     //Global.logger.Debug("CommandState: " + ngw_state.Command_Data.effect_config + " |: "+ Global.LightingStateManager);
                   
-                    (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                    (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile( ngw_state.Command_Data.effect_config);
 
                 }
                 else if (ngw_state.Command.Equals("CorsEvent"))
                 {
                     //Global.logger.Debug("CommandEvent: " + ngw_state.Command_Data.effect_config);
 
-                    (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                    (Global.LightingStateManager.GetCurrentProfile() as Application).SwitchToCorsairProfile( ngw_state.Command_Data.effect_config);
                 }
                 //Razer
                 else if (ngw_state.Command.Equals("CreateMouseEffect"))

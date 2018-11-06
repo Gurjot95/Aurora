@@ -100,7 +100,11 @@ namespace Aurora.Settings.Layers
                     Devices.Logitech.Logitech_keyboardBitmapKeys logi_key = Devices.Logitech.LogitechDevice.ToLogitechBitmap(key);
 
                     if (logi_key != Devices.Logitech.Logitech_keyboardBitmapKeys.UNKNOWN && bitmap.Length > 0)
-                        bitmap_layer.Set(key, GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4])));
+                    {
+                        Color color = GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4]));
+                     
+                        bitmap_layer.Set(key, color);
+                    }
                 }
             }
 
@@ -379,7 +383,8 @@ namespace Aurora.Settings.Layers
             else if (ngw_state.Command.Equals("CorsGame"))
             {
                 Global.logger.Debug("WrapperHandler CommandGame: " + ngw_state.Command_Data.effect_config);
-                corsairGame = ngw_state.Command_Data.effect_config;
+                //corsairGame = ngw_state.Command_Data.effect_config;
+                CurrentApp(gamestate).setCorsairGame(ngw_state.Command_Data.effect_config);
             }
             else if (ngw_state.Command.Equals("CorsState"))
             {
@@ -388,7 +393,7 @@ namespace Aurora.Settings.Layers
                 {
                     CurrentApp(gamestate).ActiveCorsairProfiles().Remove(profileName);
                 }
-                CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, profileName);
+                CurrentApp(gamestate).SwitchToCorsairProfile(profileName);
 
             }
             else if (ngw_state.Command.Equals("CorsEvent"))
@@ -398,14 +403,14 @@ namespace Aurora.Settings.Layers
                 // stopWatch.Start();
                 // TimeSpan ts = stopWatch.Elapsed;
 
-                CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, ngw_state.Command_Data.effect_config);
+                CurrentApp(gamestate).SwitchToEventProfile(ngw_state.Command_Data.effect_config);
                 //long elapsedTime = stopWatch.ElapsedMilliseconds;
             }
             else if (ngw_state.Command.Equals("CorsClearState"))
             {
                 //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
 
-                String ProfileToRemove = ngw_state.Command_Data.effect_config; 
+                String ProfileToRemove = ngw_state.Command_Data.effect_config;
                 String active = CurrentApp(gamestate).ActiveCorsairProfiles()[CurrentApp(gamestate).ActiveCorsairProfiles().Count() - 1];
                 Global.logger.Debug("Corsair Active: " + active);
                 if (active.Equals(ProfileToRemove))
@@ -417,7 +422,7 @@ namespace Aurora.Settings.Layers
                         loadLastProfile = CurrentApp(gamestate).ActiveCorsairProfiles()[CurrentApp(gamestate).ActiveCorsairProfiles().Count() - 1];
                     }
                     Global.logger.Debug("Corsair SwitchToLast: " + loadLastProfile);
-                    CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, loadLastProfile);
+                    CurrentApp(gamestate).SwitchToCorsairProfile(loadLastProfile);
                 }
                 else
                     CurrentApp(gamestate).ActiveCorsairProfiles().Remove(ProfileToRemove);
@@ -429,7 +434,7 @@ namespace Aurora.Settings.Layers
                 //Global.logger.Debug("WrapperHandler CommandEvent: " + ngw_state.Command_Data.effect_config);
 
                 CurrentApp(gamestate).ActiveCorsairProfiles().Clear();
-                CurrentApp(gamestate).SwitchToCorsairProfile(corsairGame, "default");
+                CurrentApp(gamestate).SwitchToCorsairProfile("default");
             }
             //Razer
             else if (ngw_state.Command.Equals("CreateMouseEffect"))
@@ -440,7 +445,7 @@ namespace Aurora.Settings.Layers
             {
                 Color primary = Color.Red;
                 Color secondary = Color.Blue;
-
+              
                 if (ngw_state.Command_Data.red_start >= 0 &&
                     ngw_state.Command_Data.green_start >= 0 &&
                     ngw_state.Command_Data.blue_start >= 0
@@ -468,13 +473,12 @@ namespace Aurora.Settings.Layers
                 Global.logger.Info("Unknown Wrapper Command: " + ngw_state.Command);
             }
         }
-        static string corsairGame = "";
 
         public Application CurrentApp(IGameState gameState)
         {
             JObject provider = Newtonsoft.Json.Linq.JObject.Parse(gameState.GetNode("provider"));
             string name = provider.GetValue("name").ToString().ToLowerInvariant();
-           return (Global.LightingStateManager.GetProfileFromProcessName(name) as Application);
+            return (Global.LightingStateManager.GetProfileFromProcessName(name) as Application);
         }
 
         public float[] RgbToHsv(Color colorRgb)

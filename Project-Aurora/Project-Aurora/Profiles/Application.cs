@@ -18,6 +18,8 @@ using Newtonsoft.Json.Serialization;
 using System.Collections.ObjectModel;
 using Aurora.Settings;
 using System.Collections;
+using System.Diagnostics;
+using System.Timers;
 
 namespace Aurora.Profiles
 {
@@ -164,8 +166,82 @@ namespace Aurora.Profiles
         }
 
 
-        public void SwitchToCorsairProfile(String gameName, String name)
+        public void SwitchToEventProfile(String name)
         {
+            if (String.IsNullOrEmpty(gameName))
+            {
+                Global.logger.Debug("Null Game: " + name);
+                return;
+            }
+
+            if (this.Settings.SelectedProfile.Equals(name))
+            {
+                Global.logger.Debug("Profile Already Loaded: " + name);
+                return;
+            }
+            String filename = Path.Combine(GetProfileFolderPath(), GetValidFilename(name) + ".json");
+            ApplicationProfile newProfileSettings = LoadProfile(filename);
+            float max = newProfileSettings.MaxVisibleAnimationLayerDuration;
+            Global.logger.Debug("Max Event Animation: " + name + " |max: " + max);
+            if (max != 0)
+            {
+                if (newProfileSettings != null && Profile != newProfileSettings)
+                {
+                    if (Profile != null)
+                    {
+                        //this.SaveProfile();
+                        Profile.PropertyChanged -= Profile_PropertyChanged;
+                    }
+
+                    Profile = newProfileSettings;
+                    this.Settings.SelectedProfile = name;
+                    // Profile.PropertyChanged += Profile_PropertyChanged;
+
+                    App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
+
+                    ActiveCorsairProfiles().Remove(name);
+                    ActiveCorsairProfiles().Add(name);
+                    Timer aTimer = new System.Timers.Timer();
+                    aTimer.Interval = max * 1000;
+
+                    // Hook up the Elapsed event for the timer. 
+                    aTimer.Elapsed += OnTimedEvent;
+
+                    // Have the timer fire repeated events (true is the default)
+                    aTimer.AutoReset = false;
+
+                    // Start the timer
+                    aTimer.Enabled = true;
+                }
+
+            }
+        }
+
+        private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            Global.logger.Debug("Event stopping: " + " |max: " + e.SignalTime);
+            ActiveCorsairProfiles().Remove(ActiveCorsairProfiles()[ActiveCorsairProfiles().Count - 1]);
+            Global.logger.Debug("Corsair Event Removed: " + ActiveCorsairProfiles()[ActiveCorsairProfiles().Count - 1]);
+            String loadLastProfile = "default";
+            if (ActiveCorsairProfiles().Count() > 0)
+            {
+                loadLastProfile =ActiveCorsairProfiles()[ActiveCorsairProfiles().Count() - 1];
+            }
+            Global.logger.Debug("Corsair SwitchToLast After Event: " + loadLastProfile);
+            SwitchToCorsairProfile(loadLastProfile);
+            SwitchToCorsairProfile(ActiveCorsairProfiles()[ActiveCorsairProfiles().Count - 1]);
+        }
+        String gameName = "";
+
+        public void setCorsairGame(String game)
+        {
+            gameName = game;
+
+        }
+
+        public void SwitchToCorsairProfile(String name)
+        {
+
             try
             {
                 if (String.IsNullOrEmpty(gameName))
@@ -187,10 +263,7 @@ namespace Aurora.Profiles
                 Global.logger.Debug("FileName: " + filename + " |Game Name: " + gameName);
                 //SwitchToProfile();
                 ApplicationProfile newProfileSettings = LoadProfile(filename);
-                if (newProfileSettings.AllAnimationLayersDuration1)
-                {
 
-                }
                 if (Disposed)
                     return;
 
@@ -207,6 +280,9 @@ namespace Aurora.Profiles
                     // Profile.PropertyChanged += Profile_PropertyChanged;
 
                     App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
+
+                    ActiveCorsairProfiles().Remove(name);
+
                     ActiveCorsairProfiles().Add(name);
                 }
 

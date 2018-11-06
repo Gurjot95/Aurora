@@ -92,7 +92,6 @@ namespace Aurora.Devices.Corsair
                         if (headsetstand != null)
                             headsetstand.Brush = (CUE.NET.Brushes.SolidColorBrush)Color.Transparent;
 
-
                         if (keyboard == null && mouse == null && headset == null && mousemat == null && headsetstand == null)
                             throw new WrapperException("No devices found");
                         else
