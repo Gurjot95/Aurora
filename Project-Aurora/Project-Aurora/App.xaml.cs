@@ -315,26 +315,31 @@ namespace Aurora
                     System.Windows.MessageBox.Show("GameStateListener Exception.\r\n" + exc);
                     Environment.Exit(0);
                 }
-
-                if (!Global.net_listener.Start())
+                try
                 {
-                    Global.logger.Error("GameStateListener could not start");
-                    System.Windows.MessageBox.Show("GameStateListener could not start. Try running this program as Administrator.\r\nExiting.");
-                    Environment.Exit(0);
+                    if (!Global.net_listener.Start())
+                    {
+                        Global.logger.Error("GameStateListener could not start");
+                        System.Windows.MessageBox.Show("GameStateListener could not start. Try running this program as Administrator.\r\nExiting.");
+                        Environment.Exit(0);
+                    }
+
+                    Global.logger.Info("Listening for game integration calls...");
+
+                    Global.logger.Info("Loading ResourceDictionaries...");
+                    this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("Themes/MetroDark/MetroDark.MSControls.Core.Implicit.xaml", UriKind.Relative) });
+                    this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("Themes/MetroDark/MetroDark.MSControls.Toolkit.Implicit.xaml", UriKind.Relative) });
+                    Global.logger.Info("Loaded ResourceDictionaries");
+
+
+                    Global.logger.Info("Loading ConfigUI...");
+
+                    MainWindow = new ConfigUI();
+                    ((ConfigUI)MainWindow).Display();
+                }catch(Exception exe)
+                {
+                    Global.logger.Info("Exception in Loading Resource or Config."+exe);
                 }
-
-                Global.logger.Info("Listening for game integration calls...");
-
-                Global.logger.Info("Loading ResourceDictionaries...");
-                this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("Themes/MetroDark/MetroDark.MSControls.Core.Implicit.xaml", UriKind.Relative) });
-                this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("Themes/MetroDark/MetroDark.MSControls.Toolkit.Implicit.xaml", UriKind.Relative) });
-                Global.logger.Info("Loaded ResourceDictionaries");
-
-
-                Global.logger.Info("Loading ConfigUI...");
-
-                MainWindow = new ConfigUI();
-                ((ConfigUI)MainWindow).Display();
             }
             else
             {

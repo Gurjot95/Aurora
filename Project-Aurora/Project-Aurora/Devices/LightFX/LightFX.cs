@@ -367,7 +367,7 @@ namespace Aurora.Devices.LightFX
                     } else if (status != ALIENFX_BUSY) {
                         Thread.Sleep(50);
                         // continue;
-                        Global.logger.Debug("Not busy false");
+                        //Global.logger.Debug("Not busy false");
                         //return false;
                     }
                     Reset(0x04);

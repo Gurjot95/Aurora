@@ -55,11 +55,13 @@ namespace Aurora.EffectsEngine.Animations
             {
                 _cutOffPoint = 1.0f - _cutOffPoint;
 
-                foreach (var kvp in spectrum.GetSpectrumColors())
-                    newColorGradients.Add((1 - _cutOffPoint) * kvp.Key + _cutOffPoint, kvp.Value);
-
-                newColorGradients.Add(_cutOffPoint - 0.0001f, Color.Transparent);
-                newColorGradients.Add(0.0f, Color.Transparent);
+                foreach (var kvp in spectrum.GetSpectrumColors()) { 
+                    if(!newColorGradients.ContainsKey((1 - _cutOffPoint) * kvp.Key + _cutOffPoint))
+                newColorGradients.Add((1 - _cutOffPoint) * kvp.Key + _cutOffPoint, kvp.Value); }
+                if (!newColorGradients.ContainsKey(_cutOffPoint - 0.0001f))
+                    newColorGradients.Add(_cutOffPoint - 0.0001f, Color.Transparent);
+                if (!newColorGradients.ContainsKey(0.0f))
+                    newColorGradients.Add(0.0f, Color.Transparent);
 
                 _newbrush.colorGradients = newColorGradients;
             }
@@ -69,11 +71,12 @@ namespace Aurora.EffectsEngine.Animations
                 {
                     if (kvp.Key >= (1 - 1 / _cutOffPoint))
                     {
-                        newColorGradients.Add((1 - 1 / _cutOffPoint) * kvp.Key + _cutOffPoint, kvp.Value);
+                        if (!newColorGradients.ContainsKey((1 - 1 / _cutOffPoint) * kvp.Key + _cutOffPoint))
+                            newColorGradients.Add((1 - 1 / _cutOffPoint) * kvp.Key + _cutOffPoint, kvp.Value);
                     }
                 }
-
-                newColorGradients.Add(0.0f, spectrum.GetColorAt((1 - 1 / _cutOffPoint)));
+                if (!newColorGradients.ContainsKey(0.0f))
+                    newColorGradients.Add(0.0f, spectrum.GetColorAt((1 - 1 / _cutOffPoint)));
             }
 
             _newbrush.SetBrushType(EffectBrush.BrushType.Radial);
