@@ -1,14 +1,5 @@
-﻿using CUE.NET;
-using CUE.NET.Devices.Generic.Enums;
-using CUE.NET.Devices.Headset;
-using CUE.NET.Devices.Headset.Enums;
-using CUE.NET.Devices.Keyboard;
-using CUE.NET.Devices.Keyboard.Enums;
-using CUE.NET.Devices.Mouse;
-using CUE.NET.Devices.Mouse.Enums;
-using CUE.NET.Devices.Mousemat;
-using CUE.NET.Devices.HeadsetStand;
-using CUE.NET.Exceptions;
+﻿using RGB.NET;
+using RGB.NET.Devices.Corsair;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,6 +9,8 @@ using System.Threading.Tasks;
 using Aurora.Settings;
 using Microsoft.Win32.TaskScheduler;
 using System.ComponentModel;
+using RGB.NET.Core;
+using Color = System.Drawing.Color;
 
 namespace Aurora.Devices.Corsair
 {
@@ -30,11 +23,11 @@ namespace Aurora.Devices.Corsair
         private bool keyboard_updated = false;
         private bool peripheral_updated = false;
 
-        CorsairKeyboard keyboard;
-        CorsairMouse mouse;
-        CorsairHeadset headset;
-        CorsairMousemat mousemat;
-        CorsairHeadsetStand headsetstand;
+        RGBDeviceType keyboard;
+        CorsairMouseRGBDevice mouse;
+        CorsairHeadsetRGBDevice headset;
+        CorsairMousepadRGBDevice mousemat;
+        CorsairHeadsetStandRGBDevice headsetstand;
 
         private readonly object action_lock = new object();
 
@@ -60,7 +53,7 @@ namespace Aurora.Devices.Corsair
                 return devicename + ": Not initialized";
             }
         }
-
+        RGBSurface surface = RGBSurface.Instance;
         public bool Initialize()
         {
             lock (action_lock)
@@ -70,27 +63,36 @@ namespace Aurora.Devices.Corsair
                     try
                     {
                         if (wasInitializedOnce)
-                            CueSDK.Reinitialize(true);
+                            surface.LoadDevices(CorsairDeviceProvider.Instance);
                         else
-                            CueSDK.Initialize(true);
+                            surface.LoadDevices(CorsairDeviceProvider.Instance);
 
                         Global.logger.Info("Corsair device, Initialized with " + CueSDK.LoadedArchitecture + "-SDK");
 
-                        keyboard = CueSDK.KeyboardSDK;
-                        mouse = CueSDK.MouseSDK;
-                        headset = CueSDK.HeadsetSDK;
-                        mousemat = CueSDK.MousematSDK;
-                        headsetstand = CueSDK.HeadsetStandSDK;
+                        surface.LoadDevices(CorsairDeviceProvider.Instance, RGBDeviceType.Keyboard | RGBDeviceType.LedMatrix
+                                               | RGBDeviceType.Mousepad | RGBDeviceType.LedStripe
+                                               | RGBDeviceType.Mouse | RGBDeviceType.Headset
+                                               | RGBDeviceType.HeadsetStand);
+                        foreach (IRGBDevice device in RGBSurface.Instance.Devices) { 
+                            LightbarSpecialPart lightbar = device.GetSpecialDevicePart<LightbarSpecialPart>();
+                            switch (device.DeviceInfo.DeviceType)
+                            {
+                                case RGBDeviceType.Keyboard:
+                                    if (lightbar != null)
+                                    {
+                                    }
+                                        break;
+                            }
                         if (keyboard != null)
-                            keyboard.Brush = (CUE.NET.Brushes.SolidColorBrush)Color.Transparent;
+                            keyboard.Brush = (RGB.NET.Brushes.SolidColorBrush)Color.Transparent;
                         if (mouse != null)
-                            mouse.Brush = (CUE.NET.Brushes.SolidColorBrush)Color.Transparent;
+                            mouse.Brush = (RGB.NET.Brushes.SolidColorBrush)Color.Transparent;
                         if (headset != null)
-                            headset.Brush = (CUE.NET.Brushes.SolidColorBrush)Color.Transparent;
+                            headset.Brush = (RGB.NET.Brushes.SolidColorBrush)Color.Transparent;
                         if (mousemat != null)
-                            mousemat.Brush = (CUE.NET.Brushes.SolidColorBrush)Color.Transparent;
+                            mousemat.Brush = (RGB.NET.Brushes.SolidColorBrush)Color.Transparent;
                         if (headsetstand != null)
-                            headsetstand.Brush = (CUE.NET.Brushes.SolidColorBrush)Color.Transparent;
+                            headsetstand.Brush = (RGB.NET.Brushes.SolidColorBrush)Color.Transparent;
 
                         if (keyboard == null && mouse == null && headset == null && mousemat == null && headsetstand == null)
                             throw new WrapperException("No devices found");
