@@ -441,7 +441,8 @@ namespace Aurora.Utils
                     return DeviceKeys.BRIGHTNESS_SWITCH;
                 case (CorsairLedId.WinLock):
                     return DeviceKeys.LOCK_SWITCH;
-
+                case (CorsairLedId.MR):
+                    return DeviceKeys.Peripheral_Logo;
                 case (CorsairLedId.Mute):
                     return DeviceKeys.VOLUME_MUTE;
                 case (CorsairLedId.VolumeUp):

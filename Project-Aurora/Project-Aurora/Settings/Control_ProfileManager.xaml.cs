@@ -252,7 +252,7 @@ namespace Aurora.Settings
 
                                 foreach (XElement property in profileElement.Element("properties").Elements())
                                 {
-                                    if ("Keyboard".Equals(property.Element("key").Value))
+                                    if ("Mouse".Equals(property.Element("key").Value) || "Keyboard".Equals(property.Element("key").Value))
                                     {
                                         foreach (XElement profProperty in property.Element("value").Element("properties").Descendants())
                                         {
@@ -261,7 +261,8 @@ namespace Aurora.Settings
                                                 var hasValue = profProperty.Element("value0");
                                                 if (hasValue != null)
                                                 {
-                                                    var layers = profProperty.Parent.Parent.Parent.Parent.Parent; Global.logger.Debug("Layers: " + layers.Name);
+                                                    var layers = profProperty.Parent.Parent.Parent.Parent.Parent;
+                                                    if("Mouse".Equals(property.Element("key").Value))
                                                     FocusedApplication.Profile.Layers.Clear();
 
                                                     uint _basePolyID = 2147483648;
@@ -317,10 +318,18 @@ namespace Aurora.Settings
                                                                     case "Led_KeyboardLogo":
                                                                         keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.Logo;
                                                                         break;
+                                                                    case "MouseLogoLed":
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.MR;
+                                                                        break;
                                                                     default:
-                                                                        if (key.Value.StartsWith("Led_Top"))
-                                                                            key.Value = "G18";
-                                                                        keyValue = (CUE.NET.Devices.Generic.Enums.CorsairLedId)Enum.Parse(typeof(CUE.NET.Devices.Generic.Enums.CorsairLedId), key.Value);
+                                                                        try
+                                                                        {
+                                                                            keyValue = (CUE.NET.Devices.Generic.Enums.CorsairLedId)Enum.Parse(typeof(CUE.NET.Devices.Generic.Enums.CorsairLedId), key.Value);
+                                                                        }
+                                                                        catch (Exception ex)
+                                                                        {
+                                                                            keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.Invalid;
+                                                                        }
                                                                         break;
                                                                 }
 
@@ -332,54 +341,94 @@ namespace Aurora.Settings
                                                                         affected_keys.keys.Add(deviceKey);
                                                                 }
                                                             }
-                                                            catch (Exception)
+                                                            catch (Exception ex)
                                                             {
-                                                                Global.logger.Debug("Exception in profile");
+                                                                Global.logger.Debug("Exception in profile: " + ex);
                                                                 //break;
                                                             }
                                                         }
 
                                                         var lightingInfo = layer.Element("ptr_wrapper").Element("data").Element("lighting");
-                                                        var transitionInfo = lightingInfo.Element("ptr_wrapper").Element("data").Element("transitions");
-                                                        if (transitionInfo == null)
+                                                        var layerPolyName = "";
+                                                        XElement layerPolyId;
+                                                        XElement transitionInfo = null;
+                                                        XElement mouseEffects = null;
+                                                        if (lightingInfo == null)
                                                         {
-                                                            transitionInfo = lightingInfo.Element("ptr_wrapper").Element("data").Element("base").Element("transitions");
-                                                        }
-                                                        var layerPolyId = lightingInfo.Element("polymorphic_id");
-                                                        var layerPolyName = lightingInfo.Element("polymorphic_name")?.Value;
-
-                                                        if (String.IsNullOrWhiteSpace(layerPolyName))
-                                                        {
-                                                            if (_definedPolyIDS.ContainsKey(uint.Parse(layerPolyId.Value)))
-                                                                layerPolyName = _definedPolyIDS[uint.Parse(layerPolyId.Value)];
-                                                            var waveCheck = lightingInfo.Element("ptr_wrapper").Element("data").Element("velocity");
-                                                            var rippleCheck = lightingInfo.Element("ptr_wrapper").Element("data").Element("waveSpread");
-
-                                                            if (rippleCheck != null)
+                                                            lightingInfo = layer.Element("ptr_wrapper").Element("data");
+                                                            var effectName = lightingInfo.Element("effect").Value;
+                                                          
+                                                            foreach (XElement element in lightingInfo.Element("params").Elements())
                                                             {
-                                                                layerPolyName = "RippleLighting";
-                                                            }
-                                                            else if (waveCheck != null)
-                                                            {
-                                                                layerPolyName = "WaveLighting";
-
-                                                            }
-                                                            else
-                                                            {
-                                                                var gradientCheck = transitionInfo.Element("value1");
-                                                                if (gradientCheck != null)
+                                                                var key = element.Element("key").Value;
+                                                                if (key.Equals(effectName))
                                                                 {
-                                                                    layerPolyName = "GradientLighting";
+                                                                    mouseEffects = element;
+                                                                    layerPolyName = "Mouse "+key;
+                                                                    break;
                                                                 }
-                                                                else
-                                                                    layerPolyName = "StaticLighting";
                                                             }
+
                                                         }
                                                         else
-                                                            _definedPolyIDS.Add(uint.Parse(layerPolyId.Value) - _basePolyID, layerPolyName);
+                                                        {
+                                                            transitionInfo = lightingInfo.Element("ptr_wrapper").Element("data").Element("transitions");
+                                                            if (transitionInfo == null)
+                                                            {
+                                                                transitionInfo = lightingInfo.Element("ptr_wrapper").Element("data").Element("base").Element("transitions");
+                                                            }
+                                                            layerPolyId = lightingInfo.Element("polymorphic_id");
+                                                            layerPolyName = lightingInfo.Element("polymorphic_name")?.Value;
 
-                                                        Global.logger.Debug("Animation: " + layerName+" |:"+layerPolyName);
-                                                        if ("StaticLighting".Equals(layerPolyName))
+                                                            if (String.IsNullOrWhiteSpace(layerPolyName))
+                                                            {
+                                                                if (_definedPolyIDS.ContainsKey(uint.Parse(layerPolyId.Value)))
+                                                                    layerPolyName = _definedPolyIDS[uint.Parse(layerPolyId.Value)];
+                                                                var waveCheck = lightingInfo.Element("ptr_wrapper").Element("data").Element("velocity");
+                                                                var rippleCheck = lightingInfo.Element("ptr_wrapper").Element("data").Element("waveSpread");
+
+                                                                if (rippleCheck != null)
+                                                                {
+                                                                    layerPolyName = "RippleLighting";
+                                                                }
+                                                                else if (waveCheck != null)
+                                                                {
+                                                                    layerPolyName = "WaveLighting";
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    var gradientCheck = transitionInfo.Element("value1");
+                                                                    if (gradientCheck != null)
+                                                                    {
+                                                                        layerPolyName = "GradientLighting";
+                                                                    }
+                                                                    else
+                                                                        layerPolyName = "StaticLighting";
+                                                                }
+                                                            }
+                                                            else
+                                                                _definedPolyIDS.Add(uint.Parse(layerPolyId.Value) - _basePolyID, layerPolyName);
+                                                        }
+                                                        Global.logger.Debug("Animation: " + layerName + " |:" + layerPolyName);
+                                                        if ("Mouse BasicStaticColor".Equals(layerPolyName))
+                                                        {
+                                                            FocusedApplication.Profile.Layers.Add(new Layers.Layer()
+                                                            {
+                                                                Name = layerName,
+                                                                Enabled = layerEnabled,
+                                                                Handler = new Layers.SolidColorLayerHandler()
+                                                                {
+                                                                    Properties = new Layers.LayerHandlerProperties()
+                                                                    {
+                                                                        _Sequence = affected_keys,
+                                                                        _PrimaryColor = System.Drawing.ColorTranslator.FromHtml(mouseEffects.Element("value").Element("color").Value)
+                                                                    },
+                                                                    Opacity = int.Parse(mouseEffects.Element("value").Element("opacity").Value) / 255.0f
+                                                                }
+                                                            });
+                                                        }
+                                                        else if ("StaticLighting".Equals(layerPolyName))
                                                         {
                                                             FocusedApplication.Profile.Layers.Add(new Layers.Layer()
                                                             {
@@ -836,11 +885,11 @@ namespace Aurora.Settings
                                                         }
                                                     }
 
-                                                    break;
+                                                      break;
                                                 }
                                             }
                                         }
-                                        break;
+                                        // break;
                                     }
                                 }
                             }
