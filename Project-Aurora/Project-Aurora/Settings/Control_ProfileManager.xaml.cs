@@ -281,59 +281,59 @@ namespace Aurora.Settings
                                                         {
                                                             try
                                                             {
-                                                                RGB.NET.Devices.Corsair.CorsairLedId keyValue;
+                                                                CUE.NET.Devices.Generic.Enums.CorsairLedId keyValue;
 
                                                                 switch (key.Value)
                                                                 {
                                                                     case "0":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D0;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D0;
                                                                         break;
                                                                     case "1":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D1;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D1;
                                                                         break;
                                                                     case "2":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D2;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D2;
                                                                         break;
                                                                     case "3":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D3;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D3;
                                                                         break;
                                                                     case "4":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D4;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D4;
                                                                         break;
                                                                     case "5":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D5;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D5;
                                                                         break;
                                                                     case "6":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D6;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D6;
                                                                         break;
                                                                     case "7":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D7;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D7;
                                                                         break;
                                                                     case "8":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D8;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D8;
                                                                         break;
                                                                     case "9":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.D9;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.D9;
                                                                         break;
                                                                     case "Led_KeyboardLogo":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.Logo;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.Logo;
                                                                         break;
                                                                     case "MouseLogoLed":
-                                                                        keyValue = RGB.NET.Devices.Corsair.CorsairLedId.MR;
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.MR;
                                                                         break;
                                                                     default:
                                                                         try
                                                                         {
-                                                                            keyValue = (RGB.NET.Devices.Corsair.CorsairLedId)Enum.Parse(typeof(RGB.NET.Devices.Corsair.CorsairLedId), key.Value);
+                                                                            keyValue = (CUE.NET.Devices.Generic.Enums.CorsairLedId)Enum.Parse(typeof(CUE.NET.Devices.Generic.Enums.CorsairLedId), key.Value);
                                                                         }
                                                                         catch (Exception ex)
                                                                         {
-                                                                            keyValue = RGB.NET.Devices.Corsair.CorsairLedId.Invalid;
+                                                                            keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.Invalid;
                                                                         }
                                                                         break;
                                                                 }
 
-                                                                if (Enum.IsDefined(typeof(RGB.NET.Devices.Corsair.CorsairLedId), keyValue) | keyValue.ToString().Contains(","))
+                                                                if (Enum.IsDefined(typeof(CUE.NET.Devices.Generic.Enums.CorsairLedId), keyValue) | keyValue.ToString().Contains(","))
                                                                 {
                                                                     Devices.DeviceKeys deviceKey = Utils.KeyUtils.ToDeviceKeys(keyValue);
 

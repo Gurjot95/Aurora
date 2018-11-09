@@ -1,5 +1,5 @@
 ﻿using Aurora.Devices;
-using RGB.NET.Devices.Corsair;
+using CUE.NET.Devices.Generic.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
