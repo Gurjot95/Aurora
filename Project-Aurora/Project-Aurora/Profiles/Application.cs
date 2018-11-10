@@ -231,7 +231,7 @@ namespace Aurora.Profiles
             SwitchToCorsairProfile(loadLastProfile);
             SwitchToCorsairProfile(ActiveCorsairProfiles()[ActiveCorsairProfiles().Count - 1]);
         }
-        String gameName = "";
+        String gameName = "FarCry5";
 
         public void setCorsairGame(String game)
         {
