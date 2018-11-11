@@ -436,6 +436,10 @@
       <DependentUpon>Control_Diablo3.xaml</DependentUpon>
     </Compile>
     <Compile Include="Profiles\Diablo3\Diablo3Application.cs" />
+    <Compile Include="Profiles\Far Cry 5\Control_FarCry5.xaml.cs">
+      <DependentUpon>Control_FarCry5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profiles\Far Cry 5\FarCry5Application.cs" />
     <Compile Include="Profiles\Minecraft\GSI\Nodes\GameNode.cs" />
     <Compile Include="Profiles\Minecraft\Layers\Control_MinecraftKeyConflictLayer.xaml.cs">
       <DependentUpon>Control_MinecraftKeyConflictLayer.xaml</DependentUpon>
@@ -1307,6 +1311,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\deadcells_128x128.png" />
+    <None Include="Resources\Win64\Aurora-CorsairWrapper.dll" />
+    <None Include="Resources\Win64\Aurora-CorsairLEDWrapper.dll" />
+    <None Include="Resources\FarCry5_128x128.png" />
     <Content Include="wooting-rgb-sdk.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1528,6 +1535,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Profiles\Diablo3\Control_Diablo3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Profiles\Far Cry 5\Control_FarCry5.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
