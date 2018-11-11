@@ -321,6 +321,15 @@ namespace Aurora.Settings
                                                                     case "MouseLogoLed":
                                                                         keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.MR;
                                                                         break;
+                                                                    case "MouseFrontLed":
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.M1;
+                                                                        break;
+                                                                    case "MouseScrollLed":
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.M2;
+                                                                        break;
+                                                                    case "MouseSideLed":
+                                                                        keyValue = CUE.NET.Devices.Generic.Enums.CorsairLedId.M3;
+                                                                        break;
                                                                     default:
                                                                         try
                                                                         {

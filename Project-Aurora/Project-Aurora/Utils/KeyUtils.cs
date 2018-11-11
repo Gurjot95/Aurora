@@ -443,6 +443,10 @@ namespace Aurora.Utils
                     return DeviceKeys.LOCK_SWITCH;
                 case (CorsairLedId.MR):
                     return DeviceKeys.Peripheral_Logo;
+                case (CorsairLedId.M1):
+                    return DeviceKeys.Peripheral_FrontLight;
+                case (CorsairLedId.M2):
+                    return DeviceKeys.Peripheral_ScrollWheel;
                 case (CorsairLedId.Mute):
                     return DeviceKeys.VOLUME_MUTE;
                 case (CorsairLedId.VolumeUp):
