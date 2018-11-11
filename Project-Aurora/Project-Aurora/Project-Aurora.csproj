@@ -1313,7 +1313,7 @@
     <Resource Include="Resources\deadcells_128x128.png" />
     <None Include="Resources\Win64\Aurora-CorsairWrapper.dll" />
     <None Include="Resources\Win64\Aurora-CorsairLEDWrapper.dll" />
-    <None Include="Resources\FarCry5_128x128.png" />
+    <Resource Include="Resources\FarCry5_128x128.png" />
     <Content Include="wooting-rgb-sdk.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
