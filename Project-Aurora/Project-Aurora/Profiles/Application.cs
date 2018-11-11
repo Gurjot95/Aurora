@@ -199,8 +199,8 @@ namespace Aurora.Profiles
 
                     App.Current.Dispatcher.Invoke(() => ProfileChanged?.Invoke(this, new EventArgs()));
 
-                    //ActiveCorsairProfiles().Remove(name);
-                    //ActiveCorsairProfiles().Add(name);
+                    ActiveCorsairProfiles().Remove(name);
+                    ActiveCorsairProfiles().Add(name);
                     Timer aTimer = new System.Timers.Timer();
                     aTimer.Interval = max * 1000;
 
@@ -220,8 +220,8 @@ namespace Aurora.Profiles
         private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
             Global.logger.Debug("Event stopping: " + " |max: " + e.SignalTime);
-          //  Global.logger.Debug("Corsair Event Removed: " + ActiveCorsairProfiles()[ActiveCorsairProfiles().Count - 1]);
-            //ActiveCorsairProfiles().Remove(ActiveCorsairProfiles()[ActiveCorsairProfiles().Count - 1]);      
+            ActiveCorsairProfiles().Remove(ActiveCorsairProfiles()[ActiveCorsairProfiles().Count - 1]);
+            Global.logger.Debug("Corsair Event Removed: " + ActiveCorsairProfiles()[ActiveCorsairProfiles().Count - 1]);
             String loadLastProfile = "default";
             if (ActiveCorsairProfiles().Count() > 0)
             {
