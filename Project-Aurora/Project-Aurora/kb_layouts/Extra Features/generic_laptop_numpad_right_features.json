@@ -1,19 +1,101 @@
 ﻿{
   "group_tag": "keyboard",
   "origin_region": 2,
-  "grouped_keys": [
-    {
-      "visualName": "\\",
-      "tag": 51,
-      "margin_left": -195,
-      "margin_top": 74,
-      "width": 47.0,
-      "height": 30.0,
-      "font_size": 9.0,
-      "enabled": true,
-      "absolute_location": true
-    }
-  ],
+    "grouped_keys": [
+        {
+            "visualName": "\\",
+            "tag": 51,
+            "margin_left": -195,
+            "margin_top": 74,
+            "width": 47.0,
+            "height": 30.0,
+            "font_size": 9.0,
+            "enabled": true,
+            "absolute_location": true
+        },
+        {
+            "visualName": "Alienware Logo",
+            "tag": 128,
+         
+            "margin_left": -360,
+            "margin_top": -42,
+            "width": 120.0,
+            "height": 30.0,
+            "font_size": 9.0,
+            "enabled": true,
+            "absolute_location": true
+        },
+        {
+            "visualName": "Touchpad",
+            "tag": 129,
+         
+            "margin_left": -430,
+            "margin_top": -42,
+            "width": 60.0,
+            "height": 30.0,
+            "font_size": 9.0,
+            "enabled": true,
+            "absolute_location": true
+        },
+        {
+            "visualName": "LED1",
+            "tag": 142,
+         
+            "margin_left": -500,
+            "margin_top": -42,
+            "width": 40.0,
+            "height": 30.0,
+            "font_size": 9.0,
+            "enabled": true,
+            "absolute_location": true
+        },
+        {
+            "visualName": "LED2",
+            "tag": 143,
+         
+            "margin_left": -550,
+            "margin_top": -42,
+            "width": 40.0,
+            "height": 30.0,
+            "font_size": 9.0,
+            "enabled": true,
+            "absolute_location": true
+        },
+        {
+            "visualName": "LED3",
+            "tag": 144,
+         
+            "margin_left": -600,
+            "margin_top": -42,
+            "width": 40.0,
+            "height": 30.0,
+            "font_size": 9.0,
+            "enabled": true,
+            "absolute_location": true
+        },
+        {
+            "visualName": "LED4",
+            "tag": 145,
+            "margin_left": -650,
+            "margin_top": -42,
+            "width": 40.0,
+            "height": 30.0,
+            "font_size": 9.0,
+            "enabled": true,
+            "absolute_location": true
+        },
+        {
+            "visualName": "AW Rear Logo",
+            "tag": 129,
+            "margin_left": -220,
+            "margin_top": -42,
+            "width": 80.0,
+            "height": 30.0,
+            "font_size": 9.0,
+            "enabled": true,
+            "absolute_location": true
+        }
+    ],
   "key_conversion": {
     77: 51
   }

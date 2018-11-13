@@ -285,7 +285,7 @@ namespace Aurora
                             string temp;
                             while ((temp = sr.ReadLine()) != null)
                             {
-                                Global.logger.LogLine(String.Format("{0}: {1}", DateTime.Now, temp));
+                                //Global.logger.LogLine(String.Format("{0}: {1}", DateTime.Now, temp));
                                 try
                                 {
                                     //Begin handling the game state outside this loop

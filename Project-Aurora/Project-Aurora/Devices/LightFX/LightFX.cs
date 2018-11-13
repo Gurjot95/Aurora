@@ -433,10 +433,76 @@ namespace Aurora.Devices.LightFX
 
                         }
 
-                        if (key.Key == DeviceKeys.Peripheral_Logo) {
+                        if (key.Key == DeviceKeys.LOGO) {
 
-                            setColor(1, (int)BITMASK.AlienFrontLogo, key.Value.R, key.Value.G, key.Value.B);
+                            setColor(0, (int)BITMASK.AlienFrontLogo, key.Value.R, key.Value.G, key.Value.B);
                             if (!usingHID) {
+                                LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
+
+                                LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
+                            }
+                        }
+                        if (key.Key == DeviceKeys.LOGO2)
+                        {
+                            setColor(1, (int)BITMASK.AlienBackLogo, key.Value.R, key.Value.G, key.Value.B);
+                            setColor(2, (int)BITMASK.TouchPad, key.Value.R, key.Value.G, key.Value.B);
+                            if (!usingHID)
+                            {
+                                LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
+
+                                LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
+                            }
+                        }
+                        if (key.Key == DeviceKeys.Peripheral_Logo)
+                        {
+
+                           
+                            if (!usingHID)
+                            {
+                                LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
+
+                                LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
+                            }
+                        }
+                        if (key.Key == DeviceKeys.ADDITIONALLIGHT1)
+                        {
+
+                            setColor(3, (int)BITMASK.LeftPanelTop, key.Value.R, key.Value.G, key.Value.B);
+                            if (!usingHID)
+                            {
+                                LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
+
+                                LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
+                            }
+                        }
+                        if (key.Key == DeviceKeys.ADDITIONALLIGHT2)
+                        {
+
+                            setColor(4, (int)BITMASK.LeftPanelBottom, key.Value.R, key.Value.G, key.Value.B);
+                            if (!usingHID)
+                            {
+                                LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
+
+                                LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
+                            }
+                        }
+                        if (key.Key == DeviceKeys.ADDITIONALLIGHT3)
+                        {
+
+                            setColor(5, (int)BITMASK.RightPanelTop, key.Value.R, key.Value.G, key.Value.B);
+                            if (!usingHID)
+                            {
+                                LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
+
+                                LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
+                            }
+                        }
+                        if (key.Key == DeviceKeys.ADDITIONALLIGHT4)
+                        {
+
+                            setColor(6, (int)BITMASK.RightPanelBottom, key.Value.R, key.Value.G, key.Value.B);
+                            if (!usingHID)
+                            {
                                 LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
 
                                 LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
@@ -457,16 +523,16 @@ namespace Aurora.Devices.LightFX
                                      .Select(item => new { Color = item.Key, Count = item.Count() })
                                      .First();
                     LightFXSDK.color4.SetRGB(mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
-                    setColor(3, (int)BITMASK.LeftPanelTop, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
-                    setColor(4, (int)BITMASK.leftZone, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
+                    //setColor(3, (int)BITMASK.LeftPanelTop, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
+                    setColor(7, (int)BITMASK.leftZone, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
                     if (!usingHID) {
 
                         LightFXSDK.LFX_SetLightColor(1, 0, ref LightFXSDK.color4);
                     }
 
                 } else {
-                    setColor(3, (int)BITMASK.LeftPanelTop, 0, 0, 0);
-                    setColor(4, (int)BITMASK.leftZone, 0, 0, 0);
+                  //  setColor(3, (int)BITMASK.LeftPanelTop, 0, 0, 0);
+                    setColor(7, (int)BITMASK.leftZone, 0, 0, 0);
                     if (!usingHID) {
                         LightFXSDK.color1.brightness = 0;
                         LightFXSDK.LFX_SetLightColor(1, 0, ref LightFXSDK.color1);
@@ -479,15 +545,15 @@ namespace Aurora.Devices.LightFX
                                     .Select(item => new { Color = item.Key, Count = item.Count() })
                                     .First();
                     LightFXSDK.color3.SetRGB(mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
-                    setColor(5, (int)BITMASK.LeftPanelBottom, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
-                    setColor(6, (int)BITMASK.leftMiddleZone, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
+                   // setColor(5, (int)BITMASK.LeftPanelBottom, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
+                    setColor(8, (int)BITMASK.leftMiddleZone, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
                     if (!usingHID) {
                         LightFXSDK.LFX_SetLightColor(1, 2, ref LightFXSDK.color3);
                     }
                     //Global.logger.Info("Mid Left Codes: " + color3.red + " : " + color3.green + " : " + color3.blue);
                 } else {
-                    setColor(5, (int)BITMASK.LeftPanelBottom, 0, 0, 0);
-                    setColor(6, (int)BITMASK.leftMiddleZone, 0, 0, 0);
+                   // setColor(5, (int)BITMASK.LeftPanelBottom, 0, 0, 0);
+                    setColor(8, (int)BITMASK.leftMiddleZone, 0, 0, 0);
                     if (!usingHID) {
                         LightFXSDK.color3.brightness = 0;
                         LightFXSDK.LFX_SetLightColor(1, 2, ref LightFXSDK.color3);
@@ -501,8 +567,8 @@ namespace Aurora.Devices.LightFX
                                        .Select(item => new { Color = item.Key, Count = item.Count() })
                                        .First();
                     LightFXSDK.color1.SetRGB(mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
-                    setColor(7, (int)BITMASK.RightPanelTop, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
-                    setColor(8, (int)BITMASK.rightZone, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
+                   // setColor(7, (int)BITMASK.RightPanelTop, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
+                    setColor(9, (int)BITMASK.rightZone, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
                     if (!usingHID) {
                         LightFXSDK.LFX_SetLightColor(1, 3, ref LightFXSDK.color1);
                     }
@@ -511,8 +577,8 @@ namespace Aurora.Devices.LightFX
                         LightFXSDK.color1.brightness = 0;
                         LightFXSDK.LFX_SetLightColor(1, 3, ref LightFXSDK.color1);
                     }
-                    setColor(7, (int)BITMASK.RightPanelTop, 0, 0, 0);
-                    setColor(8, (int)BITMASK.rightZone, 0, 0, 0);
+                    //setColor(7, (int)BITMASK.RightPanelTop, 0, 0, 0);
+                    setColor(9, (int)BITMASK.rightZone, 0, 0, 0);
                 }
 
                 if (midRightColor.Any()) {
@@ -522,7 +588,7 @@ namespace Aurora.Devices.LightFX
                                     .First();
 
                     LightFXSDK.color2.SetRGB(mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
-                    setColor(9, (int)BITMASK.RightPanelBottom, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
+                    //setColor(9, (int)BITMASK.RightPanelBottom, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
                     setColor(10, (int)BITMASK.rightMiddleZone, mostUsed.Color.R, mostUsed.Color.G, mostUsed.Color.B);
                     if (!usingHID) {
                         LightFXSDK.LFX_SetLightColor(1, 4, ref LightFXSDK.color2);
@@ -533,7 +599,7 @@ namespace Aurora.Devices.LightFX
                         LightFXSDK.color1.brightness = 0;
                         LightFXSDK.LFX_SetLightColor(1, 4, ref LightFXSDK.color1);
                     }
-                    setColor(9, (int)BITMASK.RightPanelBottom, 0, 0, 0);
+                    //setColor(9, (int)BITMASK.RightPanelBottom, 0, 0, 0);
                     setColor(10, (int)BITMASK.rightMiddleZone, 0, 0, 0);
                 }
                 // setColor(1, TouchPad, color5.red, color5.green, color5.blue);
