@@ -433,16 +433,20 @@ namespace Aurora.Devices.LightFX
 
                         }
 
-                        if (key.Key == DeviceKeys.LOGO) {
+                        if (key.Key == DeviceKeys.Peripheral_Logo) {
 
                             setColor(0, (int)BITMASK.AlienFrontLogo, key.Value.R, key.Value.G, key.Value.B);
+                            setColor(1, (int)BITMASK.LeftPanelTop, key.Value.R, key.Value.G, key.Value.B);
+                            setColor(2, (int)BITMASK.LeftPanelBottom, key.Value.R, key.Value.G, key.Value.B);
+                            setColor(3, (int)BITMASK.RightPanelTop, key.Value.R, key.Value.G, key.Value.B);
+                            setColor(4, (int)BITMASK.RightPanelBottom, key.Value.R, key.Value.G, key.Value.B);
                             if (!usingHID) {
                                 LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
 
                                 LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
                             }
                         }
-                        if (key.Key == DeviceKeys.LOGO2)
+                        if (key.Key == DeviceKeys.ADDITIONALLIGHT5)
                         {
                             setColor(1, (int)BITMASK.AlienBackLogo, key.Value.R, key.Value.G, key.Value.B);
                             setColor(2, (int)BITMASK.TouchPad, key.Value.R, key.Value.G, key.Value.B);
@@ -453,17 +457,7 @@ namespace Aurora.Devices.LightFX
                                 LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
                             }
                         }
-                        if (key.Key == DeviceKeys.Peripheral_Logo)
-                        {
-
-                           
-                            if (!usingHID)
-                            {
-                                LightFXSDK.color.SetRGB(key.Value.R, key.Value.G, key.Value.B);
-
-                                LightFXSDK.LFX_SetLightColor(1, 5, ref LightFXSDK.color);
-                            }
-                        }
+                       
                         if (key.Key == DeviceKeys.ADDITIONALLIGHT1)
                         {
 

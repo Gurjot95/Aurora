@@ -15,7 +15,7 @@
         },
         {
             "visualName": "Alienware Logo",
-            "tag": 128,
+            "tag": 160,
          
             "margin_left": -360,
             "margin_top": -42,
@@ -27,7 +27,7 @@
         },
         {
             "visualName": "Touchpad",
-            "tag": 129,
+            "tag": 146,
          
             "margin_left": -430,
             "margin_top": -42,
@@ -86,7 +86,7 @@
         },
         {
             "visualName": "AW Rear Logo",
-            "tag": 129,
+            "tag": 146,
             "margin_left": -220,
             "margin_top": -42,
             "width": 80.0,
