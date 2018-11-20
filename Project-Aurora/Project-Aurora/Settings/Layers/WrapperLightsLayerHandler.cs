@@ -92,7 +92,7 @@ namespace Aurora.Settings.Layers
             foreach (var key in allkeys)
             {
                 if(extra_keys.ContainsKey(key))
-                    bitmap_layer.Set(key, GetBoostedColor(extra_keys[key])); 
+                    bitmap_layer.Set(key, GetBoostedColor(extra_keys[key]));
                 else
                 {
                     Devices.Logitech.Logitech_keyboardBitmapKeys logi_key = Devices.Logitech.LogitechDevice.ToLogitechBitmap(key);
