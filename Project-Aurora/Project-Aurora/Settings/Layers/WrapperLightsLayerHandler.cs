@@ -94,16 +94,7 @@ namespace Aurora.Settings.Layers
             Devices.DeviceKeys[] allkeys = Enum.GetValues(typeof(Devices.DeviceKeys)).Cast<Devices.DeviceKeys>().ToArray();
             foreach (var key in allkeys)
             {
-                bool skipKey = false;
-                foreach(KeySequence seq in Properties.CloningMap.Values.ToList())
-                {
-                    if (seq.keys.Contains(key))
-                    {
-                        skipKey = true;
-                        break;
-                    }
-                }
-                if (skipKey)
+                if (Properties.CloningMap.Values.Any(sequence => sequence.keys.Contains(key)))
                     continue;
 
                 if (extra_keys.ContainsKey(key))
