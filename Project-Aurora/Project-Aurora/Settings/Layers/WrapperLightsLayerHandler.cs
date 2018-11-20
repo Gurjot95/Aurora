@@ -92,6 +92,18 @@ namespace Aurora.Settings.Layers
             Devices.DeviceKeys[] allkeys = Enum.GetValues(typeof(Devices.DeviceKeys)).Cast<Devices.DeviceKeys>().ToArray();
             foreach (var key in allkeys)
             {
+                bool skipKey = false;
+                foreach(KeySequence seq in Properties.CloningMap.Values.ToList())
+                {
+                    if (seq.keys.Contains(key))
+                    {
+                        skipKey = true;
+                        break;
+                    }
+                }
+                if (skipKey)
+                    continue;
+
                 if (extra_keys.ContainsKey(key))
                 {
                     bitmap_layer.Set(key, GetBoostedColor(extra_keys[key]));
@@ -104,12 +116,16 @@ namespace Aurora.Settings.Layers
                 {
                     Devices.Logitech.Logitech_keyboardBitmapKeys logi_key = Devices.Logitech.LogitechDevice.ToLogitechBitmap(key);
 
-                    if (logi_key != Devices.Logitech.Logitech_keyboardBitmapKeys.UNKNOWN && bitmap.Length > 0) {
-                        bitmap_layer.Set(key, GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4])));
+                    if (logi_key != Devices.Logitech.Logitech_keyboardBitmapKeys.UNKNOWN && bitmap.Length > 0)
+                    {
+                        Color color = GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4]));
+                        bitmap_layer.Set(key, color);
 
                         // Key cloning
                         if (Properties.CloningMap.ContainsKey(key))
-                            bitmap_layer.Set(Properties.CloningMap[key], GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4])));
+                        {
+                            bitmap_layer.Set(Properties.CloningMap[key], color);
+                        }
                     }
                 }
             }
