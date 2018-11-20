@@ -96,6 +96,7 @@ namespace Aurora.Settings.Layers
             Devices.DeviceKeys[] allkeys = Enum.GetValues(typeof(Devices.DeviceKeys)).Cast<Devices.DeviceKeys>().ToArray();
             foreach (var key in allkeys)
             {
+
                 if (extra_keys.ContainsKey(key))
                 {
                     bitmap_layer.Set(key, GetBoostedColor(extra_keys[key]));
