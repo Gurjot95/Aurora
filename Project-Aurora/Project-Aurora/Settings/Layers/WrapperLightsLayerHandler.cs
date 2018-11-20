@@ -52,11 +52,7 @@ namespace Aurora.Settings.Layers
             _ColorEnhanceColorFactor = 90;
             _ColorEnhanceColorHSVSine = 0.1f;
             _ColorEnhanceColorHSVGamma = 2.5f;
-            _CloningMap = new Dictionary<DeviceKeys, KeySequence>{
-                { DeviceKeys.G1, new KeySequence(new []{ DeviceKeys.G12, DeviceKeys.G13 }) },
-                { DeviceKeys.A, new KeySequence(new []{ DeviceKeys.G14, DeviceKeys.G15 }) },
-                { DeviceKeys.D, new KeySequence(new []{ DeviceKeys.G16, DeviceKeys.G17 }) }
-            };
+            _CloningMap = new Dictionary<DeviceKeys, KeySequence>();
         }
     }
 
@@ -96,7 +92,6 @@ namespace Aurora.Settings.Layers
             Devices.DeviceKeys[] allkeys = Enum.GetValues(typeof(Devices.DeviceKeys)).Cast<Devices.DeviceKeys>().ToArray();
             foreach (var key in allkeys)
             {
-
                 if (extra_keys.ContainsKey(key))
                 {
                     bitmap_layer.Set(key, GetBoostedColor(extra_keys[key]));
