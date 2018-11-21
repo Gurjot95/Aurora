@@ -207,6 +207,8 @@ namespace Aurora.Devices.Corsair
                     else if (localKey == CorsairLedId.Invalid && key.Key == DeviceKeys.Peripheral_ScrollWheel)
                     {
                         SendColorToMouse(CorsairLedId.B3, (Color)(key.Value));
+                        SendColorToMouse(CorsairLedId.B5, (Color)(key.Value));
+                        SendColorToMouse(CorsairLedId.B6, (Color)(key.Value));
                     }
                     else if (localKey == CorsairLedId.Invalid && key.Key == DeviceKeys.MOUSEPADLIGHT1)
                     {
