@@ -400,7 +400,13 @@ namespace Aurora.Settings
                                                         {
                                                             float duration = float.Parse(lightingInfo.Element("ptr_wrapper").Element("data").Element("base").Element("base").Element("duration").Value);
                                                             AnimationTrack animTrack = new AnimationTrack(layerName, duration / 1000.0f);
-
+                                                            var startOnKeyPress = keysAndStuff.Element("executionHints").Element("startOnKeyPress").Value;
+                                                            var playOption = keysAndStuff.Element("executionHints").Element("playOption").Value;
+                                                            bool RippleEffectCheck = false;
+                                                            if (startOnKeyPress.Equals("true") && playOption.Equals("PlayFromKeyCenter"))
+                                                            {
+                                                                RippleEffectCheck = true;
+                                                            }
                                                             Dictionary<float, System.Drawing.Color> transitions = new Dictionary<float, System.Drawing.Color>();
 
                                                             foreach (XElement transition in transitionInfo.Elements())
@@ -443,7 +449,10 @@ namespace Aurora.Settings
                                                                         _Sequence = affected_keys,
                                                                         _forceKeySequence = true,
                                                                         _AnimationDuration = (duration / 1000.0f),
-                                                                        _AnimationRepeat = repeatTimes
+                                                                        _AnimationRepeat = repeatTimes,
+                                                                        _TriggerMode = RippleEffectCheck ? AnimationTriggerMode.OnKeyPress : AnimationTriggerMode.AlwaysOn,
+                                                                        _TriggerAnyKey = RippleEffectCheck,
+                                                                        _StackMode = RippleEffectCheck ? AnimationStackMode.Reset : AnimationStackMode.Ignore,
                                                                     }
                                                                 }
                                                             });
@@ -500,7 +509,13 @@ namespace Aurora.Settings
                                                         else if ("WaveLighting".Equals(layerPolyName))
                                                         {
                                                             float duration = float.Parse(lightingInfo.Element("ptr_wrapper").Element("data").Element("base").Element("base").Element("duration").Value);
-
+                                                            var startOnKeyPress = keysAndStuff.Element("executionHints").Element("startOnKeyPress").Value;
+                                                            var playOption = keysAndStuff.Element("executionHints").Element("playOption").Value;
+                                                            bool RippleEffectCheck = false;
+                                                            if (startOnKeyPress.Equals("true") && playOption.Equals("PlayFromKeyCenter"))
+                                                            {
+                                                                RippleEffectCheck = true;
+                                                            }
                                                             List<AnimationTrack> animTracks = new List<AnimationTrack>();
 
                                                             EffectsEngine.ColorSpectrum transitions = new EffectsEngine.ColorSpectrum();
@@ -750,7 +765,10 @@ namespace Aurora.Settings
                                                                         _forceKeySequence = true,
                                                                         _AnimationDuration = (duration / 1000.0f),
                                                                         _AnimationRepeat = repeatTimes,
-                                                                        _scaleToKeySequenceBounds = true
+                                                                        _scaleToKeySequenceBounds = true,
+                                                                           _TriggerMode = RippleEffectCheck ? AnimationTriggerMode.OnKeyPress : AnimationTriggerMode.AlwaysOn,
+                                                                        _TriggerAnyKey = RippleEffectCheck,
+                                                                        _StackMode = RippleEffectCheck ? AnimationStackMode.Reset : AnimationStackMode.Ignore,
                                                                     }
                                                                 }
                                                             });
@@ -758,7 +776,13 @@ namespace Aurora.Settings
                                                         else if ("RippleLighting".Equals(layerPolyName))
                                                         {
                                                             float duration = float.Parse(lightingInfo.Element("ptr_wrapper").Element("data").Element("base").Element("base").Element("duration").Value);
-
+                                                            var startOnKeyPress = keysAndStuff.Element("executionHints").Element("startOnKeyPress").Value;
+                                                            var playOption = keysAndStuff.Element("executionHints").Element("playOption").Value;
+                                                            bool RippleEffectCheck = false;
+                                                            if (startOnKeyPress.Equals("true") && playOption.Equals("PlayFromKeyCenter"))
+                                                            {
+                                                                RippleEffectCheck = true;
+                                                            }
                                                             EffectsEngine.ColorSpectrum transitions = new EffectsEngine.ColorSpectrum();
 
                                                             float smallest = 0.5f;
@@ -810,7 +834,6 @@ namespace Aurora.Settings
                                                             animTrack.SetFrame(0.0f, new AnimationGradientCircle(Effects.canvas_width_center, Effects.canvas_height_center, 0, new EffectsEngine.EffectBrush(transitions).SetBrushType(EffectsEngine.EffectBrush.BrushType.Radial), (int)width));
 
                                                             animTrack.SetFrame(terminalTime, new AnimationGradientCircle(Effects.canvas_width_center, Effects.canvas_height_center, Effects.canvas_biggest, new EffectsEngine.EffectBrush(transitions).SetBrushType(EffectsEngine.EffectBrush.BrushType.Radial), (int)width));
-
                                                             FocusedApplication.Profile.Layers.Add(new Layers.Layer()
                                                             {
                                                                 Name = layerName,
@@ -824,11 +847,15 @@ namespace Aurora.Settings
                                                                         _forceKeySequence = true,
                                                                         _AnimationDuration = (duration / 1000.0f),
                                                                         _AnimationRepeat = repeatTimes,
-                                                                        _scaleToKeySequenceBounds = true
+                                                                        _scaleToKeySequenceBounds = true,
+                                                                        _TriggerMode = RippleEffectCheck ? AnimationTriggerMode.OnKeyPress : AnimationTriggerMode.AlwaysOn,
+                                                                        _TriggerAnyKey = RippleEffectCheck,
+                                                                        _StackMode = RippleEffectCheck ?AnimationStackMode.Reset : AnimationStackMode.Ignore,
                                                                     }
                                                                 }
                                                             });
-                                                        }
+                                                            }
+                                                        
                                                         else
                                                         {
                                                             //Null, it's unknown.
