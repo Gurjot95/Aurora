@@ -828,12 +828,17 @@ namespace Aurora.Settings
                                                             width *= 3.0f;
 
                                                             AnimationTrack animTrack = new AnimationTrack(layerName, duration / 1000.0f);
-
+                                                            float centerX = Effects.canvas_width_center;
+                                                                float centerY = Effects.canvas_height_center;
                                                             float terminalTime = Effects.canvas_width / (velocity * (3.0f * 0.7f)) / 2;
+                                                            if (RippleEffectCheck) { 
+                                                               //terminalTime = duration / 1000.0f;
+                                                                centerX = 0;
+                                                                centerY = 0;
+                                                            }
+                                                            animTrack.SetFrame(0.0f, new AnimationGradientCircle(centerX, centerY, 0, new EffectsEngine.EffectBrush(transitions).SetBrushType(EffectsEngine.EffectBrush.BrushType.Radial), (int)width));
 
-                                                            animTrack.SetFrame(0.0f, new AnimationGradientCircle(Effects.canvas_width_center, Effects.canvas_height_center, 0, new EffectsEngine.EffectBrush(transitions).SetBrushType(EffectsEngine.EffectBrush.BrushType.Radial), (int)width));
-
-                                                            animTrack.SetFrame(terminalTime, new AnimationGradientCircle(Effects.canvas_width_center, Effects.canvas_height_center, Effects.canvas_biggest, new EffectsEngine.EffectBrush(transitions).SetBrushType(EffectsEngine.EffectBrush.BrushType.Radial), (int)width));
+                                                            animTrack.SetFrame(terminalTime, new AnimationGradientCircle(centerX, centerY, Effects.canvas_biggest, new EffectsEngine.EffectBrush(transitions).SetBrushType(EffectsEngine.EffectBrush.BrushType.Radial), (int)width));
                                                             FocusedApplication.Profile.Layers.Add(new Layers.Layer()
                                                             {
                                                                 Name = layerName,
@@ -850,7 +855,8 @@ namespace Aurora.Settings
                                                                         _scaleToKeySequenceBounds = true,
                                                                         _TriggerMode = RippleEffectCheck ? AnimationTriggerMode.OnKeyPress : AnimationTriggerMode.AlwaysOn,
                                                                         _TriggerAnyKey = RippleEffectCheck,
-                                                                        _StackMode = RippleEffectCheck ?AnimationStackMode.Reset : AnimationStackMode.Ignore,
+                                                                        _StackMode = RippleEffectCheck ? AnimationStackMode.Reset : AnimationStackMode.Ignore,
+                                                                        _KeyTriggerTranslate = RippleEffectCheck
                                                                     }
                                                                 }
                                                             });
