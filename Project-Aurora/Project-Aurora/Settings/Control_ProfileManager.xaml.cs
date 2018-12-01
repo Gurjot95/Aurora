@@ -261,7 +261,7 @@ namespace Aurora.Settings
                                                 var hasValue = profProperty.Element("value0");
                                                 if (hasValue != null)
                                                 {
-                                                    var layers = profProperty.Parent.Parent.Parent.Parent.Parent; Global.logger.Debug("Layers: " + layers.Name);
+                                                    var layers = profProperty.Parent.Parent.Parent.Parent.Parent;
                                                     FocusedApplication.Profile.Layers.Clear();
 
                                                     uint _basePolyID = 2147483648;
@@ -271,11 +271,16 @@ namespace Aurora.Settings
                                                     {
                                                         var keysAndStuff = layer.Element("ptr_wrapper").Element("data").Element("base");
 
-                                                        string layerName = keysAndStuff.Element("name").Value; Global.logger.Debug("layerName: " + layerName);
+                                                        string layerName = keysAndStuff.Element("name").Value; 
                                                         bool layerEnabled = bool.Parse(keysAndStuff.Element("enabled").Value);
                                                         int repeatTimes = Math.Max(int.Parse(keysAndStuff.Element("executionHints").Element("stopAfterTimes").Value), 0);
+                                                        bool stopOnRelease = bool.Parse(keysAndStuff.Element("executionHints").Element("stopOnKeyRelease").Value);
+                                                        if (stopOnRelease)
+                                                        {
+                                                            repeatTimes = 1;
+                                                        }
                                                         KeySequence affected_keys = new KeySequence();
-
+                                                        List<Keybind> bindings = new List<Keybind>();
                                                         foreach (XElement key in keysAndStuff.Element("keys").Elements())
                                                         {
                                                             try
@@ -328,8 +333,10 @@ namespace Aurora.Settings
                                                                 {
                                                                     Devices.DeviceKeys deviceKey = Utils.KeyUtils.ToDeviceKeys(keyValue);
 
-                                                                    if (deviceKey != Devices.DeviceKeys.NONE)
+                                                                    if (deviceKey != Devices.DeviceKeys.NONE) { 
                                                                         affected_keys.keys.Add(deviceKey);
+                                                                        bindings.Add(new Keybind(new System.Windows.Forms.Keys[] { Utils.KeyUtils.GetFormsKey(deviceKey) }));
+                                                                    }
                                                                 }
                                                             }
                                                             catch (Exception)
@@ -378,7 +385,6 @@ namespace Aurora.Settings
                                                         else
                                                             _definedPolyIDS.Add(uint.Parse(layerPolyId.Value) - _basePolyID, layerPolyName);
 
-                                                        Global.logger.Debug("Animation: " + layerPolyName);
                                                         if ("StaticLighting".Equals(layerPolyName))
                                                         {
                                                             FocusedApplication.Profile.Layers.Add(new Layers.Layer()
@@ -403,7 +409,12 @@ namespace Aurora.Settings
                                                             var startOnKeyPress = keysAndStuff.Element("executionHints").Element("startOnKeyPress").Value;
                                                             var playOption = keysAndStuff.Element("executionHints").Element("playOption").Value;
                                                             bool RippleEffectCheck = false;
-                                                            if (startOnKeyPress.Equals("true") && playOption.Equals("PlayFromKeyCenter"))
+                                                            bool playFromKey = false;
+                                                             if(playOption.Equals("PlayFromKeyCenter"))
+                                                            {
+                                                                playFromKey = true;
+                                                            }
+                                                            if (startOnKeyPress.Equals("true"))
                                                             {
                                                                 RippleEffectCheck = true;
                                                             }
@@ -436,7 +447,7 @@ namespace Aurora.Settings
 
                                                                 animTrack.SetFrame(transitions.Keys.ElementAt(x), new AnimationFill(transitions[transitions.Keys.ElementAt(x)], transitionDuration));
                                                             }
-
+                                                           
                                                             FocusedApplication.Profile.Layers.Add(new Layers.Layer()
                                                             {
                                                                 Name = layerName,
@@ -448,11 +459,14 @@ namespace Aurora.Settings
                                                                         _AnimationMix = new AnimationMix().AddTrack(animTrack),
                                                                         _Sequence = affected_keys,
                                                                         _forceKeySequence = true,
+                                                                        _scaleToKeySequenceBounds = true,
                                                                         _AnimationDuration = (duration / 1000.0f),
                                                                         _AnimationRepeat = repeatTimes,
                                                                         _TriggerMode = RippleEffectCheck ? AnimationTriggerMode.OnKeyPress : AnimationTriggerMode.AlwaysOn,
-                                                                        _TriggerAnyKey = RippleEffectCheck,
+                                                                      //  _TriggerAnyKey = RippleEffectCheck,
+                                                                        _TriggerKeys = bindings.ToArray(),
                                                                         _StackMode = RippleEffectCheck ? AnimationStackMode.Reset : AnimationStackMode.Ignore,
+                                                                        _KeyTriggerTranslate = playFromKey
                                                                     }
                                                                 }
                                                             });
@@ -512,7 +526,12 @@ namespace Aurora.Settings
                                                             var startOnKeyPress = keysAndStuff.Element("executionHints").Element("startOnKeyPress").Value;
                                                             var playOption = keysAndStuff.Element("executionHints").Element("playOption").Value;
                                                             bool RippleEffectCheck = false;
-                                                            if (startOnKeyPress.Equals("true") && playOption.Equals("PlayFromKeyCenter"))
+                                                            bool playFromKey = false;
+                                                            if (playOption.Equals("PlayFromKeyCenter"))
+                                                            {
+                                                                playFromKey = true;
+                                                            }
+                                                            if (startOnKeyPress.Equals("true"))
                                                             {
                                                                 RippleEffectCheck = true;
                                                             }
@@ -572,7 +591,16 @@ namespace Aurora.Settings
 
 
                                                             float _terminalOffset = velocity * _terminalTime * 2.1f;
-
+                                                            float centerX = Effects.canvas_width_center;
+                                                            float centerY = Effects.canvas_height_center;
+                                                            float widthX = width;
+                                                            if (playOption.Equals("PlayFromKeyCenter"))
+                                                            {
+                                                                //terminalTime = duration / 1000.0f;
+                                                                centerX = 0;
+                                                                centerY = 0;
+                                                                widthX = 0;
+                                                            }
                                                             if (!isDoubleSided)
                                                             {
                                                                 AnimationTrack animTrack = new AnimationTrack(layerName, duration / 1000.0f);
@@ -767,8 +795,10 @@ namespace Aurora.Settings
                                                                         _AnimationRepeat = repeatTimes,
                                                                         _scaleToKeySequenceBounds = true,
                                                                            _TriggerMode = RippleEffectCheck ? AnimationTriggerMode.OnKeyPress : AnimationTriggerMode.AlwaysOn,
-                                                                        _TriggerAnyKey = RippleEffectCheck,
+                                                                        //  _TriggerAnyKey = RippleEffectCheck,
+                                                                        _TriggerKeys = bindings.ToArray(),
                                                                         _StackMode = RippleEffectCheck ? AnimationStackMode.Reset : AnimationStackMode.Ignore,
+                                                                        _KeyTriggerTranslate = playFromKey
                                                                     }
                                                                 }
                                                             });
@@ -779,7 +809,12 @@ namespace Aurora.Settings
                                                             var startOnKeyPress = keysAndStuff.Element("executionHints").Element("startOnKeyPress").Value;
                                                             var playOption = keysAndStuff.Element("executionHints").Element("playOption").Value;
                                                             bool RippleEffectCheck = false;
-                                                            if (startOnKeyPress.Equals("true") && playOption.Equals("PlayFromKeyCenter"))
+                                                            bool playFromKey = false;
+                                                            if (playOption.Equals("PlayFromKeyCenter"))
+                                                            {
+                                                                playFromKey = true;
+                                                            }
+                                                            if (startOnKeyPress.Equals("true"))
                                                             {
                                                                 RippleEffectCheck = true;
                                                             }
@@ -828,10 +863,10 @@ namespace Aurora.Settings
                                                             width *= 3.0f;
 
                                                             AnimationTrack animTrack = new AnimationTrack(layerName, duration / 1000.0f);
-                                                            float centerX = Effects.canvas_width_center;
-                                                                float centerY = Effects.canvas_height_center;
                                                             float terminalTime = Effects.canvas_width / (velocity * (3.0f * 0.7f)) / 2;
-                                                            if (RippleEffectCheck) { 
+                                                            float centerX = Effects.canvas_width_center;
+                                                            float centerY = Effects.canvas_height_center;
+                                                            if (playOption.Equals("PlayFromKeyCenter")) { 
                                                                //terminalTime = duration / 1000.0f;
                                                                 centerX = 0;
                                                                 centerY = 0;
@@ -854,9 +889,10 @@ namespace Aurora.Settings
                                                                         _AnimationRepeat = repeatTimes,
                                                                         _scaleToKeySequenceBounds = true,
                                                                         _TriggerMode = RippleEffectCheck ? AnimationTriggerMode.OnKeyPress : AnimationTriggerMode.AlwaysOn,
-                                                                        _TriggerAnyKey = RippleEffectCheck,
+                                                                        //  _TriggerAnyKey = RippleEffectCheck,
+                                                                        _TriggerKeys = bindings.ToArray(),
                                                                         _StackMode = RippleEffectCheck ? AnimationStackMode.Reset : AnimationStackMode.Ignore,
-                                                                        _KeyTriggerTranslate = RippleEffectCheck
+                                                                        _KeyTriggerTranslate = playFromKey
                                                                     }
                                                                 }
                                                             });
