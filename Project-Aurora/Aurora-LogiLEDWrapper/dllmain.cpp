@@ -1041,6 +1041,48 @@ void _LogiLedStopEffectsOnKey(LogiLed::KeyName keyName)
 	WriteToPipe(contents);
 }
 
+bool LogiLedInitWithName(const char name[])
+{
+	if (!isInitialized)
+	{
+		//Get Application name
+		CHAR pBuf[MAX_PATH];
+		int bytes = GetModuleFileNameA(NULL, pBuf, MAX_PATH);
+		std::string filepath = pBuf;
+
+		int fn_beginning = 0;
+		for (int chr_pos = strlen(pBuf) - 1; chr_pos > -1; chr_pos--)
+		{
+			if (pBuf[chr_pos] == '\\')
+			{
+				fn_beginning = chr_pos + 1;
+				break;
+			}
+		}
+
+		program_name = filepath.substr(fn_beginning);
+
+		//Connect to the server pipe using CreateFile()
+		hPipe = CreateFile(
+			PIPE_NAME,   // pipe name 
+			GENERIC_WRITE,  // write access 
+			0,              // no sharing 
+			NULL,           // default security attributes
+			OPEN_EXISTING,  // opens existing pipe 
+			0,              // default attributes 
+			NULL);          // no template file 
+
+		if (INVALID_HANDLE_VALUE == hPipe)
+		{
+			isInitialized = false;
+			return false;
+		}
+	}
+
+	isInitialized = true;
+	return true;
+}
+
 bool LogiLedInit()
 {
 	if (!isInitialized)
@@ -1083,6 +1125,46 @@ bool LogiLedInit()
 	return true;
 }
 
+bool LogiLedGetSdkVersion(int *majorNum, int *minorNum, int *buildNum)
+{
+	return true;
+}
+bool LogiLedGetConfigOptionNumber(const wchar_t *configPath, double *defaultValue)
+{
+	return true;
+}
+bool LogiLedGetConfigOptionBool(const wchar_t *configPath, bool *defaultValue)
+{
+	return true;
+}
+bool LogiLedGetConfigOptionColor(const wchar_t *configPath, int *defaultRed, int *defaultGreen, int *defaultBlue)
+{
+	return true;
+}
+bool LogiLedGetConfigOptionRect(const wchar_t *configPath, int *defaultX, int *defaultY, int *defaultWidth, int *defaultHeight)
+{
+	return true;
+}
+bool LogiLedGetConfigOptionString(const wchar_t *configPath, wchar_t *defaultValue, int bufferSize)
+{
+	return true;
+}
+bool LogiLedGetConfigOptionKeyInput(const wchar_t *configPath, wchar_t *defaultValue, int bufferSize)
+{
+	return true;
+}
+bool LogiLedGetConfigOptionSelect(const wchar_t *configPath, wchar_t *defaultValue, int *valueSize, const wchar_t *values, int bufferSize)
+{
+	return true;
+}
+bool LogiLedGetConfigOptionRange(const wchar_t *configPath, int *defaultValue, int min, int max)
+{
+	return true;
+}
+bool LogiLedSetConfigOptionLabel(const wchar_t *configPath, wchar_t *label)
+{
+	return true;
+}
 bool LogiLedSetTargetDevice(int targetDevice)
 {
 	current_device = targetDevice;
