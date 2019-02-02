@@ -1,5 +1,4 @@
 ﻿using Aurora.Devices;
-using CUE.NET.Devices.Generic.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharpDX.RawInput;
+using RGB.NET.Devices.Corsair;
 
 namespace Aurora.Utils
 {
