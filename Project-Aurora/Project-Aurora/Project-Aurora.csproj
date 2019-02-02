@@ -82,10 +82,6 @@
     <Reference Include="CSScriptLibrary, Version=3.28.4.0, Culture=neutral, PublicKeyToken=70fcc3d18c749033, processorArchitecture=MSIL">
       <HintPath>..\packages\CS-Script.bin.3.28.4.0\lib\net46\CSScriptLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="CUE.NET, Version=1.2.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\CUE.NET.dll</HintPath>
-    </Reference>
     <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
     </Reference>
@@ -163,6 +159,26 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RGB.NET.Brushes, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RGB.NET\RGB.NET.Brushes.dll</HintPath>
+    </Reference>
+    <Reference Include="RGB.NET.Core, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RGB.NET\RGB.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RGB.NET.Decorators, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RGB.NET\RGB.NET.Decorators.dll</HintPath>
+    </Reference>
+    <Reference Include="RGB.NET.Devices.Corsair, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RGB.NET\RGB.NET.Devices.Corsair.dll</HintPath>
+    </Reference>
+    <Reference Include="RGB.NET.Groups, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RGB.NET\RGB.NET.Groups.dll</HintPath>
+    </Reference>
     <Reference Include="Roccat-Talk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>.\Roccat-Talk.dll</HintPath>
       <Private>True</Private>
@@ -1370,6 +1386,55 @@
     <Content Include="Logi\LGS\LogitechLed.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="RGB.NET\HidSharp.dll" />
+    <Content Include="RGB.NET\RGB.NET.Brushes.dll" />
+    <Content Include="RGB.NET\RGB.NET.Brushes.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Brushes.xml" />
+    <Content Include="RGB.NET\RGB.NET.Core.dll" />
+    <Content Include="RGB.NET\RGB.NET.Core.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Core.xml" />
+    <Content Include="RGB.NET\RGB.NET.Decorators.dll" />
+    <Content Include="RGB.NET\RGB.NET.Decorators.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Decorators.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Asus.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Asus.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Asus.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.CoolerMaster.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.CoolerMaster.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.CoolerMaster.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Corsair.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Corsair.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Corsair.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Debug.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Debug.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Debug.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.DMX.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.DMX.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.DMX.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Logitech.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Logitech.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Logitech.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Msi.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Msi.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Msi.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Novation.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Novation.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Novation.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Razer.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Razer.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Razer.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Roccat.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Roccat.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.Roccat.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.SoIP.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.SoIP.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.SoIP.xml" />
+    <Content Include="RGB.NET\RGB.NET.Devices.WS281X.dll" />
+    <Content Include="RGB.NET\RGB.NET.Devices.WS281X.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Devices.WS281X.xml" />
+    <Content Include="RGB.NET\RGB.NET.Groups.dll" />
+    <Content Include="RGB.NET\RGB.NET.Groups.pdb" />
+    <Content Include="RGB.NET\RGB.NET.Groups.xml" />
     <Content Include="wooting-rgb-sdk.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

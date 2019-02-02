@@ -1,0 +1,362 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RGB.NET.Devices.WS281X</name>
+    </assembly>
+    <members>
+        <member name="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice">
+            <inheritdoc />
+            <summary>
+            Represents an arduino WS2812 device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice.UpdateQueue">
+            <summary>
+            Gets the update queue performing updates for this device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice.DeviceInfo">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice.Channel">
+            <summary>
+            Gets the channel (as defined in the arduino-sketch) this device is attached to.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice.#ctor(RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo,RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBUpdateQueue,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice"/> class.
+            </summary>
+            <param name="deviceInfo">The update trigger used by this queue.</param>
+            <param name="updateQueue">The update queue performing updates for this device.</param>
+            <param name="channel">The channel (as defined in the arduino-sketch) this device is attached to.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice.CreateLedCustomData(RGB.NET.Core.LedId)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice.GetLedsToUpdate(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice.UpdateLeds(System.Collections.Generic.IEnumerable{RGB.NET.Core.Led})">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo">
+            <inheritdoc />
+            <summary>
+            Represents a generic information for a <see cref="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDevice" />.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo.DeviceName">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo.DeviceType">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo.Manufacturer">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo.Model">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo.Lighting">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo.SupportsSyncBack">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo.Image">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBDeviceInfo"/> class.
+            </summary>
+            <param name="name">The name of this device.</param>
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBUpdateQueue">
+            <inheritdoc />
+            <summary>
+            Represents the update-queue performing updates for arduino WS2812 devices.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBUpdateQueue.#ctor(RGB.NET.Core.IDeviceUpdateTrigger,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBUpdateQueue"/> class.
+            </summary>
+            <param name="updateTrigger">The update trigger used by this queue.</param>
+            <param name="portName">The name of the serial-port to connect to.</param>
+            <param name="baudRate">The baud-rate used by the serial-connection.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBUpdateQueue.OnStartup(System.Object,RGB.NET.Core.CustomUpdateData)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBUpdateQueue.GetCommands(System.Collections.Generic.Dictionary{System.Object,RGB.NET.Core.Color})">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS2812USBUpdateQueue.SendCommand(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS281XDeviceDefinition">
+            <inheritdoc />
+            <summary>
+            Represents a definition of an arduino WS2812 devices.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS281XDeviceDefinition.Port">
+            <summary>
+            Gets the name of the serial-port to connect to.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS281XDeviceDefinition.BaudRate">
+            <summary>
+            Gets the baud-rate used by the serial-connection.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Arduino.ArduinoWS281XDeviceDefinition.Name">
+            <summary>
+            Gets or sets the name used by this device.
+            This allows to use {0} as a placeholder for a incrementing number if multiple devices are created.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS281XDeviceDefinition.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.Arduino.ArduinoWS281XDeviceDefinition"/> class.
+            </summary>
+            <param name="portName">The name of the serial-port to connect to.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Arduino.ArduinoWS281XDeviceDefinition.CreateDevices">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDevice">
+            <inheritdoc />
+            <summary>
+            Represents an bitwizard WS2812 USB device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDevice.UpdateQueue">
+            <summary>
+            Gets the update queue performing updates for this device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDevice.DeviceInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDevice.#ctor(RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo,RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBUpdateQueue)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDevice"/> class.
+            </summary>
+            <param name="deviceInfo">The update trigger used by this queue.</param>
+            <param name="updateQueue">The update queue performing updates for this device.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDevice.CreateLedCustomData(RGB.NET.Core.LedId)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDevice.UpdateLeds(System.Collections.Generic.IEnumerable{RGB.NET.Core.Led})">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo">
+            <inheritdoc />
+            <summary>
+            Represents a generic information for a <see cref="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo" />.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo.DeviceName">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo.DeviceType">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo.Manufacturer">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo.Model">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo.Lighting">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo.SupportsSyncBack">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo.Image">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBDeviceInfo"/> class.
+            </summary>
+            <param name="name">The name of this device.</param>
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBUpdateQueue">
+            <inheritdoc />
+            <summary>
+            Represents the update-queue performing updates for a bitwizard WS2812 device.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBUpdateQueue.#ctor(RGB.NET.Core.IDeviceUpdateTrigger,System.String,System.Int32)">
+            <inheritdoc />
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBUpdateQueue" /> class.
+            </summary>
+            <param name="updateTrigger">The update trigger used by this queue.</param>
+            <param name="portName">The name of the serial-port to connect to.</param>
+            <param name="baudRate">The baud-rate used by the serial-connection.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBUpdateQueue.OnStartup(System.Object,RGB.NET.Core.CustomUpdateData)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS2812USBUpdateQueue.GetCommands(System.Collections.Generic.Dictionary{System.Object,RGB.NET.Core.Color})">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS281XDeviceDefinition">
+            <inheritdoc />
+            <summary>
+            Represents a definition of an bitwizard WS2812 devices.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS281XDeviceDefinition.Port">
+            <summary>
+            Gets the name of the serial-port to connect to.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS281XDeviceDefinition.BaudRate">
+            <summary>
+            Gets the baud-rate used by the serial-connection.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS281XDeviceDefinition.Name">
+            <summary>
+            Gets or sets the name used by this device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS281XDeviceDefinition.StripLength">
+            <summary>
+            Gets or sets the amount of leds of this device.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS281XDeviceDefinition.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS281XDeviceDefinition"/> class.
+            </summary>
+            <param name="portName">The name of the serial-port to connect to.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.Bitwizard.BitwizardWS281XDeviceDefinition.CreateDevices">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.IWS281XDeviceDefinition">
+            <summary>
+            Marker interface for WS281X device definitions.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.IWS281XDeviceDefinition.CreateDevices">
+            <summary>
+            Gets the devices defined by this definition.
+            </summary>
+            <returns>The initialized devices defined by this definition.</returns>
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1">
+            <inheritdoc />
+            <summary>
+            Represents a update queue for serial devices.
+            </summary>
+            <typeparam name="TData">The type of data sent through the serial connection.</typeparam>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1.Prompt">
+            <summary>
+            Gets or sets the prompt to wait for between sending commands.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1.SerialPort">
+            <summary>
+            Gets the serial port used by this queue.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1.#ctor(RGB.NET.Core.IDeviceUpdateTrigger,System.String,System.Int32)">
+            <inheritdoc />
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1"/> class.
+            </summary>
+            <param name="updateTrigger">The update trigger used by this queue.</param>
+            <param name="portName">The name of the serial-port to connect to.</param>
+            <param name="baudRate">The baud-rate used by the serial-connection.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1.OnStartup(System.Object,RGB.NET.Core.CustomUpdateData)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1.Update(System.Collections.Generic.Dictionary{System.Object,RGB.NET.Core.Color})">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1.GetCommands(System.Collections.Generic.Dictionary{System.Object,RGB.NET.Core.Color})">
+            <summary>
+            Gets the commands that need to be sent to the device to update the requested colors.
+            </summary>
+            <param name="dataSet">The set of data that needs to be updated.</param>
+            <returns>The commands to be sent.</returns>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.SerialPortUpdateQueue`1.SendCommand(`0)">
+            <summary>
+            Sends a command as a string followed by a line-break to the device.
+            This most likely needs to be overwritten if the data-type isn't string.  
+            </summary>
+            <param name="command">The command to be sent.</param>
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.WS281XDeviceProvider">
+            <inheritdoc />
+            <summary>
+            Represents a device provider responsible for WS2812B- and WS2811-Led-devices.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.WS281XDeviceProvider.Instance">
+            <summary>
+            Gets the singleton <see cref="T:RGB.NET.Devices.WS281X.WS281XDeviceProvider"/> instance.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.WS281XDeviceProvider.IsInitialized">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.WS281XDeviceProvider.Devices">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.WS281XDeviceProvider.HasExclusiveAccess">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.WS281XDeviceProvider.DeviceDefinitions">
+            <summary>
+            Gets a list of all defined device-definitions.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.WS281XDeviceProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.WS281X.WS281XDeviceProvider"/> class.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if this constructor is called even if there is already an instance of this class.</exception>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.WS281XDeviceProvider.AddDeviceDefinition(RGB.NET.Devices.WS281X.IWS281XDeviceDefinition)">
+            <summary>
+            Adds the given <see cref="T:RGB.NET.Devices.WS281X.IWS281XDeviceDefinition" /> to this device-provider.
+            </summary>
+            <param name="deviceDefinition">The <see cref="T:RGB.NET.Devices.WS281X.IWS281XDeviceDefinition"/> to add.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.WS281XDeviceProvider.Initialize(RGB.NET.Core.RGBDeviceType,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.WS281XDeviceProvider.ResetDevices">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.WS281XDeviceProvider.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.WS281X.WS281XDeviceProviderLoader">
+            <inheritdoc />
+            <summary>
+            Represents a device provider loaded used to dynamically load WS281X devices into an application.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.WS281X.WS281XDeviceProviderLoader.RequiresInitialization">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.WS281X.WS281XDeviceProviderLoader.GetDeviceProvider">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

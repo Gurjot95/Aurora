@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RGB.NET.Devices.SoIP</name>
+    </assembly>
+    <members>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientDeviceDefinition.Hostname">
+            <summary>
+            Gets or sets the hostname of the device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientDeviceDefinition.Port">
+            <summary>
+            Gets or sets the port to device is listening to.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientDeviceDefinition.Manufacturer">
+            <summary>
+            Gets or sets the manufacturer of the device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientDeviceDefinition.Model">
+            <summary>
+            Gets or sets the model name of the device.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDevice.UpdateLeds(System.Collections.Generic.IEnumerable{RGB.NET.Core.Led})">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDevice.SyncBack">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDevice.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo">
+            <inheritdoc />
+            <summary>
+            Represents device information for a <see cref="T:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDevice"/> />.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.DeviceType">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.DeviceName">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.Manufacturer">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.Model">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.Lighting">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.SupportsSyncBack">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.Image">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.Hostname">
+            <summary>
+            The hostname of the device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Client.SoIPClientRGBDeviceInfo.Port">
+            <summary>
+            The port of the device. 
+            </summary>
+        </member>
+        <member name="T:RGB.NET.Devices.SoIP.Generic.ISoIPDeviceDefinition">
+            <summary>
+            Marker interface for SoIP device definitions.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerDeviceDefinition.Port">
+            <summary>
+            Gets or sets the port to device is listening to.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerDeviceDefinition.Manufacturer">
+            <summary>
+            Gets or sets the manufacturer of the device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerDeviceDefinition.Model">
+            <summary>
+            Gets or sets the model name of the device.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerDeviceDefinition.Leds">
+            <summary>
+            Gets the IDs of the leds represented by this device.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDevice.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo">
+            <inheritdoc />
+            <summary>
+            Represents device information for a <see cref="T:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDevice"/> />.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo.DeviceType">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo.DeviceName">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo.Manufacturer">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo.Model">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo.Lighting">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo.SupportsSyncBack">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo.Image">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.Server.SoIPServerRGBDeviceInfo.Port">
+            <summary>
+            The port of the device. 
+            </summary>
+        </member>
+        <member name="T:RGB.NET.Devices.SoIP.Server.SoIPServerUpdateQueue">
+            <inheritdoc />
+            <summary>
+            Represents the update-queue performing updates for E131-DMX devices.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.Server.SoIPServerUpdateQueue.#ctor(RGB.NET.Core.IDeviceUpdateTrigger,SimpleTCP.SimpleTcpServer)">
+            <inheritdoc />
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.SoIP.Server.SoIPServerUpdateQueue" /> class.
+            </summary>
+            <param name="updateTrigger">The update trigger used by this queue.</param>
+            <param name="tcpServer">The hostname of the device this queue is performing updates for.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.Server.SoIPServerUpdateQueue.Update(System.Collections.Generic.Dictionary{System.Object,RGB.NET.Core.Color})">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.SoIP.SoIPDeviceProvider">
+            <inheritdoc />
+            <summary>
+            Represents a device provider responsible for debug devices.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.SoIPDeviceProvider.Instance">
+            <summary>
+            Gets the singleton <see cref="T:RGB.NET.Devices.SoIP.SoIPDeviceProvider"/> instance.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.SoIPDeviceProvider.IsInitialized">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.SoIPDeviceProvider.Devices">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.SoIPDeviceProvider.HasExclusiveAccess">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.SoIPDeviceProvider.DeviceDefinitions">
+            <summary>
+            Gets a list of all defined device-definitions.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.SoIPDeviceProvider.UpdateTrigger">
+            <summary>
+            The <see cref="T:RGB.NET.Core.DeviceUpdateTrigger"/> used to trigger the updates for dmx devices. 
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.SoIPDeviceProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.SoIP.SoIPDeviceProvider"/> class.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if this constructor is called even if there is already an instance of this class.</exception>
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.SoIPDeviceProvider.AddDeviceDefinition(RGB.NET.Devices.SoIP.Generic.ISoIPDeviceDefinition)">
+            <summary>
+            Adds the given <see cref="T:RGB.NET.Devices.SoIP.Generic.ISoIPDeviceDefinition" /> to this device-provider.
+            </summary>
+            <param name="deviceDefinition">The <see cref="T:RGB.NET.Devices.SoIP.Generic.ISoIPDeviceDefinition"/> to add.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.SoIPDeviceProvider.Initialize(RGB.NET.Core.RGBDeviceType,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.SoIPDeviceProvider.ResetDevices">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.SoIPDeviceProvider.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.SoIP.SoIPDeviceProviderLoader">
+            <summary>
+            Represents a device provider loaded used to dynamically load SoIP (syncback over IP) devices into an application.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.SoIP.SoIPDeviceProviderLoader.RequiresInitialization">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.SoIP.SoIPDeviceProviderLoader.GetDeviceProvider">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RGB.NET.Devices.Roccat</name>
+    </assembly>
+    <members>
+        <member name="P:RGB.NET.Devices.Roccat.Native._RoccatSDK.LoadedArchitecture">
+            <summary>
+            Gets the loaded architecture (x64/x86).
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.Roccat.Native._RoccatSDK.Reload">
+            <summary>
+            Reloads the SDK.
+            </summary>
+        </member>
+        <member name="T:RGB.NET.Devices.Roccat.RoccatDeviceProvider">
+            <inheritdoc />
+            <summary>
+            Represents a device provider responsible for roccat (TalkFX)devices.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Roccat.RoccatDeviceProvider.Instance">
+            <summary>
+            Gets the singleton <see cref="T:RGB.NET.Devices.Roccat.RoccatDeviceProvider"/> instance.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Roccat.RoccatDeviceProvider.PossibleX86NativePaths">
+            <summary>
+            Gets a modifiable list of paths used to find the native SDK-dlls for x86 applications.
+            The first match will be used.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Roccat.RoccatDeviceProvider.PossibleX64NativePaths">
+            <summary>
+            Gets a modifiable list of paths used to find the native SDK-dlls for x64 applications.
+            The first match will be used.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Roccat.RoccatDeviceProvider.IsInitialized">
+            <inheritdoc />
+            <summary>
+            Indicates if the SDK is initialized and ready to use.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Roccat.RoccatDeviceProvider.LoadedArchitecture">
+            <summary>
+            Gets the loaded architecture (x64/x86).
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Roccat.RoccatDeviceProvider.HasExclusiveAccess">
+            <inheritdoc />
+            <summary>
+            Gets whether the application has exclusive access to the SDK or not.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Roccat.RoccatDeviceProvider.Devices">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.Roccat.RoccatDeviceProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.Roccat.RoccatDeviceProvider"/> class.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if this constructor is called even if there is already an instance of this class.</exception>
+        </member>
+        <member name="M:RGB.NET.Devices.Roccat.RoccatDeviceProvider.Initialize(RGB.NET.Core.RGBDeviceType,System.Boolean,System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:RGB.NET.Core.RGBDeviceException">Thrown if the SDK is already initialized or if the SDK is not compatible to CUE.</exception>
+        </member>
+        <member name="M:RGB.NET.Devices.Roccat.RoccatDeviceProvider.ResetDevices">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.Roccat.RoccatDeviceProvider.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.Roccat.RoccatDeviceProviderLoader">
+            <summary>
+            Represents a device provider loaded used to dynamically load roccat devices into an application.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Roccat.RoccatDeviceProviderLoader.RequiresInitialization">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.Roccat.RoccatDeviceProviderLoader.GetDeviceProvider">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

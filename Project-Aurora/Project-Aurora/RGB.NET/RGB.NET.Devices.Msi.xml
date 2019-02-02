@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RGB.NET.Devices.Msi</name>
+    </assembly>
+    <members>
+        <member name="T:RGB.NET.Devices.Msi.Exceptions.MysticLightException">
+            <inheritdoc />
+            <summary>
+            Represents an exception thrown by the MysticLight-SDK.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.Exceptions.MysticLightException.ErrorCode">
+            <summary>
+            Gets the raw error code provided by the SDK.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.Exceptions.MysticLightException.Description">
+            <summary>
+            Gets the text-description the <see cref="P:RGB.NET.Devices.Msi.Exceptions.MysticLightException.ErrorCode"/> resolves too.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.Exceptions.MysticLightException.#ctor(System.Int32,System.String)">
+            <inheritdoc />
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.Msi.MysticLightException" /> class.
+            </summary>
+            <param name="errorCode">The raw error code provided by the SDK.</param>
+            <param name="description">The text-description of the error.</param>
+        </member>
+        <member name="T:RGB.NET.Devices.Msi.IMsiRGBDevice">
+            <summary>
+            Represents a msi RGB-device.
+            </summary>
+        </member>
+        <member name="T:RGB.NET.Devices.Msi.MsiRGBDevice`1">
+            <inheritdoc cref="T:RGB.NET.Core.AbstractRGBDevice`1" />
+            <inheritdoc cref="T:RGB.NET.Devices.Msi.IMsiRGBDevice" />
+            <summary>
+            Represents a generic Msi-device. (keyboard, mouse, headset, mousepad).
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDevice`1.DeviceInfo">
+            <inheritdoc />
+            <summary>
+            Gets information about the <see cref="T:RGB.NET.Devices.Msi.MsiRGBDevice" />.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiRGBDevice`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.Msi.MsiRGBDevice`1"/> class.
+            </summary>
+            <param name="info">The generic information provided by Msi for the device.</param>
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiRGBDevice`1.Initialize">
+            <summary>
+            Initializes the device.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiRGBDevice`1.InitializeLayout">
+            <summary>
+            Initializes the <see cref="T:RGB.NET.Core.Led"/> and <see cref="T:RGB.NET.Core.Size"/> of the device.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiRGBDevice`1.UpdateLeds(System.Collections.Generic.IEnumerable{RGB.NET.Core.Led})">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.Msi.MsiRGBDeviceInfo">
+            <inheritdoc />
+            <summary>
+            Represents a generic information for a Corsair-<see cref="T:RGB.NET.Core.IRGBDevice" />.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.DeviceType">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.MsiDeviceType">
+            <summary>
+            Gets the internal type of the <see cref="T:RGB.NET.Core.IRGBDevice"/>.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.DeviceName">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.Manufacturer">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.Model">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.Image">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.SupportsSyncBack">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.Lighting">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiRGBDeviceInfo.#ctor(RGB.NET.Core.RGBDeviceType,System.String,System.String,System.String)">
+            <summary>
+            Internal constructor of managed <see cref="T:RGB.NET.Devices.Msi.MsiRGBDeviceInfo"/>.
+            </summary>
+            <param name="deviceType">The type of the <see cref="T:RGB.NET.Core.IRGBDevice"/>.</param>
+            <param name="msiDeviceType">The internal type of the <see cref="T:RGB.NET.Core.IRGBDevice"/>.</param>
+            <param name="manufacturer">The manufacturer-name of the <see cref="T:RGB.NET.Core.IRGBDevice"/>.</param>
+            <param name="model">The model-name of the <see cref="T:RGB.NET.Core.IRGBDevice"/>.</param>
+        </member>
+        <member name="T:RGB.NET.Devices.Msi.MsiDeviceProvider">
+            <inheritdoc />
+            <summary>
+            Represents a device provider responsible for Cooler Master devices.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProvider.Instance">
+            <summary>
+            Gets the singleton <see cref="T:RGB.NET.Devices.Msi.MsiDeviceProvider"/> instance.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProvider.PossibleX86NativePaths">
+            <summary>
+            Gets a modifiable list of paths used to find the native SDK-dlls for x86 applications.
+            The first match will be used.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProvider.PossibleX64NativePaths">
+            <summary>
+            Gets a modifiable list of paths used to find the native SDK-dlls for x64 applications.
+            The first match will be used.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProvider.IsInitialized">
+            <inheritdoc />
+            <summary>
+            Indicates if the SDK is initialized and ready to use.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProvider.LoadedArchitecture">
+            <summary>
+            Gets the loaded architecture (x64/x86).
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProvider.HasExclusiveAccess">
+            <inheritdoc />
+            <summary>
+            Gets whether the application has exclusive access to the SDK or not.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProvider.Devices">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProvider.GetCulture">
+            <summary>
+            Gets or sets a function to get the culture for a specific device.
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiDeviceProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RGB.NET.Devices.Msi.MsiDeviceProvider"/> class.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if this constructor is called even if there is already an instance of this class.</exception>
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiDeviceProvider.Initialize(RGB.NET.Core.RGBDeviceType,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiDeviceProvider.ResetDevices">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiDeviceProvider.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:RGB.NET.Devices.Msi.MsiDeviceProviderLoader">
+            <summary>
+            Represents a device provider loaded used to dynamically load msi devices into an application.
+            </summary>
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.MsiDeviceProviderLoader.RequiresInitialization">
+            <inheritdoc />
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.MsiDeviceProviderLoader.GetDeviceProvider">
+            <inheritdoc />
+        </member>
+        <member name="P:RGB.NET.Devices.Msi.Native._MsiSDK.LoadedArchitecture">
+            <summary>
+            Gets the loaded architecture (x64/x86).
+            </summary>
+        </member>
+        <member name="M:RGB.NET.Devices.Msi.Native._MsiSDK.Reload">
+            <summary>
+            Reloads the SDK.
+            </summary>
+        </member>
+    </members>
+</doc>

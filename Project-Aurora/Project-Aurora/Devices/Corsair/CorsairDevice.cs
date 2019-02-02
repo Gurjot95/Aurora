@@ -23,6 +23,9 @@ using Aurora.Settings;
 using Microsoft.Win32.TaskScheduler;
 using System.ComponentModel;
 using CUE.NET.Groups;
+using RGB.NET.Core;
+using Color = System.Drawing.Color;
+using RGB.NET.Devices.Corsair;
 
 namespace Aurora.Devices.Corsair
 {
@@ -35,15 +38,15 @@ namespace Aurora.Devices.Corsair
         private bool keyboard_updated = false;
         private bool peripheral_updated = false;
 
-        CorsairKeyboard keyboard;
-        CorsairMouse mouse;
-        CorsairHeadset headset;
-        CorsairMousemat mousemat;
-        CorsairHeadsetStand headsetstand;
-        CorsairCommanderPro commanderPro;
-        CorsairCooler cooler;
-        CorsairLightingNodePro lightingNode;
-        CorsairMemoryModule memory;
+        IRGBDevice keyboard;
+        IRGBDevice mouse;
+        IRGBDevice headset;
+        IRGBDevice mousemat;
+        IRGBDevice headsetstand;
+        IRGBDevice commanderPro;
+        IRGBDevice cooler;
+        IRGBDevice lightingNode;
+        IRGBDevice memory;
 
         private readonly object action_lock = new object();
 
@@ -51,7 +54,7 @@ namespace Aurora.Devices.Corsair
         private long lastUpdateTime = 0;
 
         //Previous data
-        private Color previous_peripheral_Color = Color.Black;
+        private System.Drawing.Color previous_peripheral_Color = Color.Black;
 
         public string GetDeviceName()
         {
@@ -74,6 +77,7 @@ namespace Aurora.Devices.Corsair
         ILedGroup memoryLED;
         ILedGroup coolerLED;
         bool exclusive;
+        public static RGBSurface surface;
         public bool Initialize()
         {
             lock (action_lock)
@@ -84,13 +88,14 @@ namespace Aurora.Devices.Corsair
                     try
                     {
                         if (wasInitializedOnce)
-                            CueSDK.Reinitialize(exclusive);
-                        else
-                            CueSDK.Initialize(exclusive);
+                        surface = RGBSurface.Instance;
+                        //else
+                        //   CueSDK.Initialize(exclusive);
 
-                        Global.logger.Info("Corsair device, Initialized with " + CueSDK.ProtocolDetails.SdkVersion + "-SDK");
+                        surface.LoadDevices(CorsairDeviceProvider.Instance, RGBDeviceType.All, true, true);
+                       // Global.logger.Info("Corsair device, Initialized with " + CueSDK.ProtocolDetails.SdkVersion + "-SDK");
 
-                        keyboard = CueSDK.KeyboardSDK;
+                        keyboard = RGBSurface.Instance.Devices.
                         mouse = CueSDK.MouseSDK;
                         headset = CueSDK.HeadsetSDK;
                         mousemat = CueSDK.MousematSDK;
