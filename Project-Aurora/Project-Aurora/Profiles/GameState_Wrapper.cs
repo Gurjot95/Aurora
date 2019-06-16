@@ -12,6 +12,12 @@ namespace Aurora.Profiles
         private Provider_Wrapper _Provider;
         private string _Command;
         private Command_Wrapper _Command_Data;
+        public enum DeviceType_Wrapper
+        {
+            Logitech,
+            Razer,
+            Unknown
+        }
         private int[] _Bitmap;
         private Extra_Keys_Wrapper _Extra_Keys;
 
@@ -68,6 +74,23 @@ namespace Aurora.Profiles
                 }
 
                 return _Command_Data;
+            }
+        }
+
+        /// <summary>
+        /// The device_type sent from the wrapper
+        /// </summary>
+        [GameStateIgnoreAttribute]
+        public DeviceType_Wrapper DeviceType
+        {
+            get
+            {
+                Newtonsoft.Json.Linq.JToken value;
+
+                if (_ParsedData.TryGetValue("device_type", out value))
+                    return value.ToObject<DeviceType_Wrapper>();
+                else
+                    return DeviceType_Wrapper.Logitech;
             }
         }
 
@@ -248,7 +271,7 @@ namespace Aurora.Profiles
             : base(JSON)
         {
             peripheral = Utils.ColorUtils.GetColorFromInt(GetInt("peripheral"));
-            logo = Utils.ColorUtils.GetColorFromInt( GetInt("logo"));
+            logo = Utils.ColorUtils.GetColorFromInt(GetInt("logo"));
             mousepad1 = Utils.ColorUtils.GetColorFromInt(GetInt("mousepad0"));
             mousepad2 = Utils.ColorUtils.GetColorFromInt(GetInt("mousepad1"));
             mousepad3 = Utils.ColorUtils.GetColorFromInt(GetInt("mousepad2"));
@@ -264,27 +287,27 @@ namespace Aurora.Profiles
             mousepad13 = Utils.ColorUtils.GetColorFromInt(GetInt("mousepad12"));
             mousepad14 = Utils.ColorUtils.GetColorFromInt(GetInt("mousepad13"));
             mousepad15 = Utils.ColorUtils.GetColorFromInt(GetInt("mousepad14"));
-            badge = Utils.ColorUtils.GetColorFromInt( GetInt("badge"));
-            G1 = Utils.ColorUtils.GetColorFromInt( GetInt("G1"));
-            G2 = Utils.ColorUtils.GetColorFromInt( GetInt("G2"));
-            G3 = Utils.ColorUtils.GetColorFromInt( GetInt("G3"));
-            G4 = Utils.ColorUtils.GetColorFromInt( GetInt("G4"));
-            G5 = Utils.ColorUtils.GetColorFromInt( GetInt("G5"));
-            G6 = Utils.ColorUtils.GetColorFromInt( GetInt("G6"));
-            G7 = Utils.ColorUtils.GetColorFromInt( GetInt("G7"));
-            G8 = Utils.ColorUtils.GetColorFromInt( GetInt("G8"));
-            G9 = Utils.ColorUtils.GetColorFromInt( GetInt("G9"));
-            G10 = Utils.ColorUtils.GetColorFromInt( GetInt("G10"));
-            G11 = Utils.ColorUtils.GetColorFromInt( GetInt("G11"));
-            G12 = Utils.ColorUtils.GetColorFromInt( GetInt("G12"));
-            G13 = Utils.ColorUtils.GetColorFromInt( GetInt("G13"));
-            G14 = Utils.ColorUtils.GetColorFromInt( GetInt("G14"));
-            G15 = Utils.ColorUtils.GetColorFromInt( GetInt("G15"));
-            G16 = Utils.ColorUtils.GetColorFromInt( GetInt("G16"));
-            G17 = Utils.ColorUtils.GetColorFromInt( GetInt("G17"));
-            G18 = Utils.ColorUtils.GetColorFromInt( GetInt("G18"));
-            G19 = Utils.ColorUtils.GetColorFromInt( GetInt("G19"));
-            G20 = Utils.ColorUtils.GetColorFromInt( GetInt("G20"));
+            badge = Utils.ColorUtils.GetColorFromInt(GetInt("badge"));
+            G1 = Utils.ColorUtils.GetColorFromInt(GetInt("G1"));
+            G2 = Utils.ColorUtils.GetColorFromInt(GetInt("G2"));
+            G3 = Utils.ColorUtils.GetColorFromInt(GetInt("G3"));
+            G4 = Utils.ColorUtils.GetColorFromInt(GetInt("G4"));
+            G5 = Utils.ColorUtils.GetColorFromInt(GetInt("G5"));
+            G6 = Utils.ColorUtils.GetColorFromInt(GetInt("G6"));
+            G7 = Utils.ColorUtils.GetColorFromInt(GetInt("G7"));
+            G8 = Utils.ColorUtils.GetColorFromInt(GetInt("G8"));
+            G9 = Utils.ColorUtils.GetColorFromInt(GetInt("G9"));
+            G10 = Utils.ColorUtils.GetColorFromInt(GetInt("G10"));
+            G11 = Utils.ColorUtils.GetColorFromInt(GetInt("G11"));
+            G12 = Utils.ColorUtils.GetColorFromInt(GetInt("G12"));
+            G13 = Utils.ColorUtils.GetColorFromInt(GetInt("G13"));
+            G14 = Utils.ColorUtils.GetColorFromInt(GetInt("G14"));
+            G15 = Utils.ColorUtils.GetColorFromInt(GetInt("G15"));
+            G16 = Utils.ColorUtils.GetColorFromInt(GetInt("G16"));
+            G17 = Utils.ColorUtils.GetColorFromInt(GetInt("G17"));
+            G18 = Utils.ColorUtils.GetColorFromInt(GetInt("G18"));
+            G19 = Utils.ColorUtils.GetColorFromInt(GetInt("G19"));
+            G20 = Utils.ColorUtils.GetColorFromInt(GetInt("G20"));
         }
     }
 

@@ -8,7 +8,7 @@ namespace Aurora.Profiles.Aurora_Wrapper
 {
     public class GameEvent_Aurora_Wrapper : LightEvent
     {
-        internal int[] bitmap = new int[126];
+        internal int[] bitmap = new int[256];
         internal Dictionary<Devices.DeviceKeys, Color> extra_keys = new Dictionary<Devices.DeviceKeys, Color>();
         internal Color last_fill_color = Color.Black;
         internal Dictionary<Devices.DeviceKeys, KeyEffect> key_effects = new Dictionary<Devices.DeviceKeys, KeyEffect>();
@@ -21,6 +21,8 @@ namespace Aurora.Profiles.Aurora_Wrapper
         internal int colorEnhance_color_factor = 90;
         internal float colorEnhance_color_hsv_sine = 0.1f;
         internal float colorEnhance_color_hsv_gamma = 2.5f;
+
+        GameState_Wrapper.DeviceType_Wrapper device;
 
         public GameEvent_Aurora_Wrapper() : base()
         {
@@ -74,14 +76,34 @@ namespace Aurora.Profiles.Aurora_Wrapper
             Devices.DeviceKeys[] allkeys = Enum.GetValues(typeof(Devices.DeviceKeys)).Cast<Devices.DeviceKeys>().ToArray();
             foreach (var key in allkeys)
             {
-                if(extra_keys.ContainsKey(key))
+                if (extra_keys.ContainsKey(key))
                     bitmap_layer.Set(key, GetBoostedColor(extra_keys[key]));
                 else
-                {
-                    Devices.Logitech.Logitech_keyboardBitmapKeys logi_key = Devices.Logitech.LogitechDevice.ToLogitechBitmap(key);
+                {   //For Logitech Wrappers
+                    /*
+                    Right now, Logitech, or Razer old wrapper doesn't send any device_type command 
+                    as they both map their keys according to Logitech layout but this can be changed 
+                    in future to support more device wrappers in future
+                    */
+                    if (device == GameState_Wrapper.DeviceType_Wrapper.Logitech || device == GameState_Wrapper.DeviceType_Wrapper.Unknown)
+                    {
+                        Devices.Logitech.Logitech_keyboardBitmapKeys logi_key = Devices.Logitech.LogitechDevice.ToLogitechBitmap(key);
 
-                    if (logi_key != Devices.Logitech.Logitech_keyboardBitmapKeys.UNKNOWN && bitmap.Length > 0)
-                        bitmap_layer.Set(key, GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4])));
+                        if (logi_key != Devices.Logitech.Logitech_keyboardBitmapKeys.UNKNOWN && bitmap.Length > 0)
+                            bitmap_layer.Set(key, GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4])));
+                    }
+                    //For New Chroma Method
+                    if (device == GameState_Wrapper.DeviceType_Wrapper.Razer)
+                    {
+
+                        if (Devices.Razer.RazerLayoutMap.GenericKeyboard.ContainsKey(key))
+                        {
+                            var index = Devices.Razer.RazerLayoutMap.GenericKeyboard[key];
+                            var value = bitmap[index[1] + index[0] * 22];
+                            bitmap_layer.Set(key, GetBoostedColor(Utils.ColorUtils.GetColorFromInt(value)));
+                        }
+                    }
+
                 }
             }
 
@@ -134,6 +156,7 @@ namespace Aurora.Profiles.Aurora_Wrapper
             UpdateWrapperLights(new_game_state);
         }
 
+
         internal virtual void UpdateWrapperLights(IGameState new_game_state)
         {
             if (new_game_state is GameState_Wrapper)
@@ -142,7 +165,7 @@ namespace Aurora.Profiles.Aurora_Wrapper
 
                 GameState_Wrapper ngw_state = (new_game_state as GameState_Wrapper);
 
-                if(ngw_state.Sent_Bitmap.Length != 0)
+                if (ngw_state.Sent_Bitmap.Length != 0)
                     bitmap = ngw_state.Sent_Bitmap;
 
                 SetExtraKey(Devices.DeviceKeys.LOGO, ngw_state.Extra_Keys.logo);
@@ -185,6 +208,8 @@ namespace Aurora.Profiles.Aurora_Wrapper
                 SetExtraKey(Devices.DeviceKeys.G19, ngw_state.Extra_Keys.G19);
                 SetExtraKey(Devices.DeviceKeys.G20, ngw_state.Extra_Keys.G20);
 
+                //Checks the wrapper device
+                device = ngw_state.DeviceType;
                 if (ngw_state.Command.Equals("SetLighting"))
                 {
                     Color newfill = Color.FromArgb(ngw_state.Command_Data.red_start, ngw_state.Command_Data.green_start, ngw_state.Command_Data.blue_start);
@@ -374,7 +399,7 @@ namespace Aurora.Profiles.Aurora_Wrapper
                     current_effect = null;
                 }
                 //Razer
-                else if(ngw_state.Command.Equals("CreateMouseEffect"))
+                else if (ngw_state.Command.Equals("CreateMouseEffect"))
                 {
 
                 }
