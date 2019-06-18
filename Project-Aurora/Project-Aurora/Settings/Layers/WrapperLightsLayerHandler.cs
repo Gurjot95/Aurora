@@ -56,7 +56,7 @@ namespace Aurora.Settings.Layers
             _CloningMap = new Dictionary<DeviceKeys, KeySequence>();
         }
     }
-    
+
     [LogicOverrideIgnoreProperty("_PrimaryColor")]
     [LogicOverrideIgnoreProperty("_Sequence")]
     public class WrapperLightsLayerHandler : LayerHandler<WrapperLightsLayerHandlerProperties>
@@ -68,7 +68,7 @@ namespace Aurora.Settings.Layers
         internal EntireEffect current_effect = null;
 
         internal Dictionary<Devices.DeviceKeys, Color> colors = new Dictionary<Devices.DeviceKeys, Color>();
-
+        GameState_Wrapper.DeviceType_Wrapper device;
         public WrapperLightsLayerHandler()
         {
             this._ID = "WrapperLights";
@@ -112,17 +112,46 @@ namespace Aurora.Settings.Layers
                 }
                 else
                 {
-                    Devices.Logitech.Logitech_keyboardBitmapKeys logi_key = Devices.Logitech.LogitechDevice.ToLogitechBitmap(key);
+                    //For Logitech Wrappers
+                    /*
+                    Right now, Logitech, or Razer old wrapper doesn't send any device_type command 
+                    as they both map their keys according to Logitech layout but this can be changed 
+                    in future to support more device wrappers in future
+                    */
+                    if (device == GameState_Wrapper.DeviceType_Wrapper.Logitech || device == GameState_Wrapper.DeviceType_Wrapper.Unknown)
+                    {
+                        Devices.Logitech.Logitech_keyboardBitmapKeys logi_key = Devices.Logitech.LogitechDevice.ToLogitechBitmap(key);
 
-                    if (logi_key != Devices.Logitech.Logitech_keyboardBitmapKeys.UNKNOWN && bitmap.Length > 0) {
-                        var color = GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4]));
-                        bitmap_layer.Set(key, color);
+                        if (logi_key != Devices.Logitech.Logitech_keyboardBitmapKeys.UNKNOWN && bitmap.Length > 0)
+                        {
+                            Color color = GetBoostedColor(Utils.ColorUtils.GetColorFromInt(bitmap[(int)logi_key / 4]));
+                            bitmap_layer.Set(key, color);
 
-                        // Key cloning
-                        if (Properties.CloningMap.ContainsKey(key))
-                            bitmap_layer.Set(Properties.CloningMap[key], color);
+                            // Key cloning
+                            if (Properties.CloningMap.ContainsKey(key))
+                                bitmap_layer.Set(Properties.CloningMap[key], color);
+                        }
                     }
+                    //For New Chroma Method
+                    if (device == GameState_Wrapper.DeviceType_Wrapper.Razer)
+                    {
+
+                        if (Devices.Razer.RazerLayoutMap.GenericKeyboard.ContainsKey(key))
+                        {
+                            var index = Devices.Razer.RazerLayoutMap.GenericKeyboard[key];
+                            var value = bitmap[index[1] + index[0] * 22];
+                            Color color = GetBoostedColor(Utils.ColorUtils.GetColorFromInt(value));
+                            bitmap_layer.Set(key, color);
+
+                            // Key cloning
+                            if (Properties.CloningMap.ContainsKey(key))
+                                bitmap_layer.Set(Properties.CloningMap[key], color);
+                        }
+                    }
+
+                   
                 }
+
             }
 
             layers.Enqueue(bitmap_layer);
@@ -224,7 +253,7 @@ namespace Aurora.Settings.Layers
             SetExtraKey(Devices.DeviceKeys.G18, ngw_state.Extra_Keys.G18);
             SetExtraKey(Devices.DeviceKeys.G19, ngw_state.Extra_Keys.G19);
             SetExtraKey(Devices.DeviceKeys.G20, ngw_state.Extra_Keys.G20);
-
+            device = ngw_state.DeviceType;
             if (ngw_state.Command.Equals("SetLighting"))
             {
                 Color newfill = Color.FromArgb(ngw_state.Command_Data.red_start, ngw_state.Command_Data.green_start, ngw_state.Command_Data.blue_start);
