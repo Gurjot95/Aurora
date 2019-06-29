@@ -170,7 +170,7 @@ namespace Aurora
                 ServerThread.Abort();
                 ServerThread = null;
             }
-                
+
 
             if (CommandThread != null)
             {
@@ -178,9 +178,9 @@ namespace Aurora
                 CommandThread = null;
             }
 
-            if(IPCpipeStream != null)
+            if (IPCpipeStream != null)
             {
-                if(IPCpipeStream.IsConnected)
+                if (IPCpipeStream.IsConnected)
                     IPCpipeStream.Disconnect();
                 IPCpipeStream.Dispose();
                 IPCpipeStream = null;
@@ -289,13 +289,13 @@ namespace Aurora
                                 try
                                 {
                                     //Begin handling the game state outside this loop
-                                    HandleNewIPCGameState(temp);
+                                        HandleNewIPCGameState(temp);
                                 }
-                                catch(Exception exc)
+                                catch (Exception exc)
                                 {
                                     Global.logger.Error("[IPCServer] HandleNewIPCGameState Exception, " + exc);
                                     //if (Global.isDebug)
-                                        Global.logger.Info("Recieved data that caused error:\n\r"+temp);
+                                    Global.logger.Info("Recieved data that caused error:\n\r" + temp);
                                 }
 
                                 //var task = new System.Threading.Tasks.Task(() => HandleNewIPCGameState(temp));

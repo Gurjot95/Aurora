@@ -13,7 +13,7 @@ namespace Aurora.Profiles.Overwatch
     {
         //Renaming this temporary so overwatch doesn't use old wrapper method
         public Overwatch()
-            : base(new LightEventConfig { Name = "Overwatch", ID = "overwatch", ProcessNames = new[] { "overwatch2.exe" }, ProfileType = typeof(WrapperProfile), OverviewControlType = typeof(Control_Overwatch), GameStateType = typeof(GameState_Wrapper), Event = new GameEvent_Generic(), IconURI = "Resources/overwatch_icon.png" })
+            : base(new LightEventConfig { Name = "Overwatch", ID = "overwatch", ProcessNames = new[] { "overwatch.exe" }, ProfileType = typeof(WrapperProfile), OverviewControlType = typeof(Control_Overwatch), GameStateType = typeof(GameState_Wrapper), Event = new GameEvent_Generic(), IconURI = "Resources/overwatch_icon.png" })
         {
             Config.ExtraAvailableLayers.Add("WrapperLights");
         }

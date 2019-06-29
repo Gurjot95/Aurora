@@ -193,80 +193,9 @@ namespace Aurora.Devices.Razer
                     {
                         SendColorToPeripheral(key.Value, forced);
                     }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT1)
+                    else if (key.Key >= DeviceKeys.MOUSEPADLIGHT1 && key.Key <= DeviceKeys.MOUSEPADLIGHT15)
                     {
-                      
-                        SendColorToMousepad(14,key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT2)
-                    {
-
-                        SendColorToMousepad(13, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT3)
-                    {
-
-                        SendColorToMousepad(12, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT4)
-                    {
-
-                        SendColorToMousepad(11, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT5)
-                    {
-
-                        SendColorToMousepad(10, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT6)
-                    {
-
-                        SendColorToMousepad(9, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT7)
-                    {
-
-                        SendColorToMousepad(8, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT8)
-                    {
-
-                        SendColorToMousepad(7, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT9)
-                    {
-
-                        SendColorToMousepad(6, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT10)
-                    {
-
-                        SendColorToMousepad(5, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT11)
-                    {
-
-                        SendColorToMousepad(4, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT12)
-                    {
-
-                        SendColorToMousepad(3, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT13)
-                    {
-
-                        SendColorToMousepad(2, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT14)
-                    {
-
-                        SendColorToMousepad(1, key.Value);
-                    }
-                    else if (key.Key == DeviceKeys.MOUSEPADLIGHT15)
-                    {
-
-                        SendColorToMousepad(0, key.Value);
+                        SendColorToMousepad(DeviceKeys.MOUSEPADLIGHT15 - key.Key, key.Value);
                     }
                     else if ((coord = GetKeyCoord(key.Key)) != null)
                     {
@@ -281,6 +210,10 @@ namespace Aurora.Devices.Razer
 
                 if (e.Cancel) return false;
                 SendColorsToKeyboard(forced);
+
+                if (peripheral_updated)
+                    mousepad.SetCustom(MousepadGrid);
+
                 return true;
             }
             catch (Exception exc)
@@ -341,7 +274,7 @@ namespace Aurora.Devices.Razer
                 if (mousepad != null && !Global.Configuration.devices_disable_mouse)
                 {
                     MousepadGrid[index] = new Color(color.R, color.G, color.B);
-                    mousepad.SetCustom(MousepadGrid);
+                    //mousepad.SetCustom(MousepadGrid);
                 }
                 previous_peripheral_Color = color;
                 peripheral_updated = true;
