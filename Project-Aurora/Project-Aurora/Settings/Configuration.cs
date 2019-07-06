@@ -394,6 +394,9 @@ namespace Aurora.Settings
         private bool getPointerUpdates = true;
         public bool GetPointerUpdates { get { return getPointerUpdates; } set { getPointerUpdates = value; InvokePropertyChanged(); } }
 
+        private bool auroraChromaOnLaunch = true;
+        public bool AuroraChromaOnLaunch { get => auroraChromaOnLaunch; set { auroraChromaOnLaunch = value; InvokePropertyChanged(); } }
+
         private bool highPriority = false;
         public bool HighPriority { get { return highPriority; } set { highPriority = value; InvokePropertyChanged(); } }
 
