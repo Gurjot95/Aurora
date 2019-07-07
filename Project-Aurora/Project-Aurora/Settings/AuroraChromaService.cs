@@ -5,6 +5,7 @@ using System.ServiceProcess;
 using System.Configuration.Install;
 using System.Windows.Input;
 using System.Reflection;
+using Aurora.Utils;
 
 namespace Aurora.Settings {
     public class AuroraChromaService : INotifyPropertyChanged {
@@ -17,24 +18,6 @@ namespace Aurora.Settings {
         private static AuroraChromaService instance;
         public static AuroraChromaService Instance { get => instance ?? (instance = new AuroraChromaService()); }
 
-        // Check if service exists
-        private static bool isServiceExist()
-        {
-            return ServiceController.GetServices().Any(s => s.ServiceName == SERVICE_NAME);
-        }
-
-        //install service
-        private static void installService()
-        {
-            ManagedInstallerClass.InstallHelper(new[] { "/LogFile=", "/LogToConsole=true", AppDomain.CurrentDomain.BaseDirectory + SERVICE_NAME+".exe" });
-        }
-
-        private static void uninstallService()
-        {
-            ManagedInstallerClass.InstallHelper(new[] { "/u", "/LogFile=", "/LogToConsole=true", AppDomain.CurrentDomain.BaseDirectory + SERVICE_NAME+".exe" });
-        }
-
-
         /// <summary>Controller bound to the AuroraChroma service</summary>
         private ServiceController controller = new ServiceController(SERVICE_NAME);
 
@@ -44,23 +27,28 @@ namespace Aurora.Settings {
         public string RunningText => Running ? "Running" : "Stopped";
 
         // Commands to start/stop the service from the UI
-        public ICommand StartCommand { get; }
-        public ICommand StopCommand { get; }
+        public ICommand StartStopCommand { get; }
+        public ICommand InstallUninstallCommand { get; }
+
+        /// <summary>Check if service exists</summary>
+        public bool ServiceInstalled => ServiceController.GetServices().Any(s => s.ServiceName == SERVICE_NAME);
+        public string ServiceInstalledText => ServiceInstalled ? "Installed" : "Not installed";
+
+        /// <summary>Event that fires when the "Running" property changes state.</summary>
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
+        // Ctor
         private AuroraChromaService() {
-            StartCommand = new StartStopCommand(this, true);
-            StopCommand = new StartStopCommand(this, false);
+            StartStopCommand = new StartStopCommandImpl(this);
+            InstallUninstallCommand = new InstallUninstallCommandImpl(this);
         }
 
         /// <summary>Method that should be called when Aurora initialises.</summary>
         public void Initialise() {
-            if (!isServiceExist())
-            {
-                installService();
-            }
             // Get initial state of service
-            Running = controller.Status == ServiceControllerStatus.Running;
+            try { Running = controller.Status == ServiceControllerStatus.Running; }
+            catch { Running = false; }
 
             // If the user wishes to start the service on launch, do so
             if (Global.Configuration.AuroraChromaOnLaunch)
@@ -105,29 +93,45 @@ namespace Aurora.Settings {
             return false;
         }
 
-        /// <summary>Event that fires when the "Running" property changes state.</summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>Install or uninstalls the AuroraChroma service.</summary>
+        private void InstallUninstallService(bool install)
+        {
+            ManagedInstallerClass.InstallHelper((install ? new string[0] : new[] { "/u" }).Concat(new[] { "/LogFile=", "/LogToConsole=true", AppDomain.CurrentDomain.BaseDirectory + SERVICE_NAME + ".exe" }).ToArray());
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
+        }
 
 
         /// <summary>
         /// Class that can be used to create commands to start/stop the service.
         /// </summary>
-        class StartStopCommand : ICommand {
+        class StartStopCommandImpl : ICommand {
 
-            private bool isStartCommand;
-
-            public StartStopCommand(AuroraChromaService inst, bool isStartCommand) {
-                this.isStartCommand = isStartCommand;
+            public StartStopCommandImpl(AuroraChromaService inst) {
                 inst.PropertyChanged += (sender, e) => CanExecuteChanged?.Invoke(this, new EventArgs());
             }
 
             public event EventHandler CanExecuteChanged;
-            public bool CanExecute(object parameter) => Instance.Running ^ isStartCommand;
+            public bool CanExecute(object parameter) => Instance.Running ^ bool.Parse(parameter.ToString());
 
             public void Execute(object parameter) {
-                if (isStartCommand) Instance.Start();
+                if (bool.Parse(parameter.ToString())) Instance.Start();
                 else Instance.Stop();
             }
+        }
+
+        /// <summary>
+        /// Class that can be used to create commands to install/uninstall the service
+        /// </summary>
+        class InstallUninstallCommandImpl : ICommand {
+
+            public event EventHandler CanExecuteChanged;
+
+            public InstallUninstallCommandImpl(AuroraChromaService inst) {
+                inst.PropertyChanged += (sender, e) => CanExecuteChanged?.Invoke(this, new EventArgs());
+            }
+
+            public bool CanExecute(object parameter) => Instance.ServiceInstalled ^ bool.Parse(parameter.ToString());
+            public void Execute(object parameter) => Instance.InstallUninstallService(bool.Parse(parameter.ToString()));
         }
     }
 }

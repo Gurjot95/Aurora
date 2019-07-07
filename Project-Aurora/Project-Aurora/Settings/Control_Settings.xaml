@@ -8,24 +8,26 @@
              xmlns:EnumDeviceKeys="clr-namespace:Aurora.Devices"
              xmlns:EnumPercentEffectType="clr-namespace:Aurora.Settings"
              xmlns:EnumInteractiveEffects="clr-namespace:Aurora.Profiles.Desktop"
-             xmlns:EnumValueConverters="clr-namespace:Aurora.Utils"
+             xmlns:u="clr-namespace:Aurora.Utils"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:Controls="clr-namespace:Aurora.Controls" xmlns:params="http://schemas.codeplex.com/elysium/params" x:Class="Aurora.Settings.Control_Settings"
              mc:Ignorable="d"
              d:DesignHeight="261.972" d:DesignWidth="403.521" Height="Auto" Width="Auto" MinHeight="300" MinWidth="850" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded" x:Name="ctrlSettings">
     <UserControl.Resources>
         <ResourceDictionary>
+            <local:BooleanToRedGreenConverter x:Key="BooleanToRedGreenConverter" />
+
             <ObjectDataProvider x:Key="PercentEffectType" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="EnumPercentEffectType:PercentEffectType" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:PercentEffectTypeToStringVC x:Key="PercentEffectTypeToStringVC"/>
+            <u:PercentEffectTypeToStringVC x:Key="PercentEffectTypeToStringVC"/>
             <DataTemplate x:Key="PercentEffectTypeTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource PercentEffectTypeToStringVC}}" />
             </DataTemplate>
 
-            <EnumValueConverters:DeviceKeysToStringVC x:Key="DeviceKeysToStringVC"/>
+            <u:DeviceKeysToStringVC x:Key="DeviceKeysToStringVC"/>
             <DataTemplate x:Key="DeviceKeys">
                 <TextBlock Text="{Binding Converter={StaticResource DeviceKeysToStringVC}}" />
             </DataTemplate>
@@ -35,7 +37,7 @@
                     <x:Type TypeName="EnumPercentEffectType:IdleEffects" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:IdleEffectsToStringVC x:Key="IdleEffectsToStringVC"/>
+            <u:IdleEffectsToStringVC x:Key="IdleEffectsToStringVC"/>
             <DataTemplate x:Key="IdleEffectsTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource IdleEffectsToStringVC}}" />
             </DataTemplate>
@@ -45,7 +47,7 @@
                     <x:Type TypeName="local:PreferredKeyboardLocalization" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:KbLayoutToStringVC x:Key="KbLayoutToStringVC"/>
+            <u:KbLayoutToStringVC x:Key="KbLayoutToStringVC"/>
             <DataTemplate x:Key="KbLayoutTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource KbLayoutToStringVC}}" />
             </DataTemplate>
@@ -55,7 +57,7 @@
                     <x:Type TypeName="local:PreferredKeyboard" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:KbBrandToStringVC x:Key="KbBrandToStringVC"/>
+            <u:KbBrandToStringVC x:Key="KbBrandToStringVC"/>
             <DataTemplate x:Key="KbBrandTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource KbBrandToStringVC}}" />
             </DataTemplate>
@@ -65,7 +67,7 @@
                     <x:Type TypeName="local:PreferredMouse" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:MouseBrandToStringVC x:Key="MouseBrandToStringVC"/>
+            <u:MouseBrandToStringVC x:Key="MouseBrandToStringVC"/>
             <DataTemplate x:Key="MouseBrandTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource MouseBrandToStringVC}}" />
             </DataTemplate>
@@ -75,7 +77,7 @@
                     <x:Type TypeName="local:MouseOrientationType" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:MouseOrientationToStringVC x:Key="MouseOrientationToStringVC"/>
+            <u:MouseOrientationToStringVC x:Key="MouseOrientationToStringVC"/>
             <DataTemplate x:Key="MouseOrientationTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource MouseOrientationToStringVC}}" />
             </DataTemplate>
@@ -85,7 +87,7 @@
                     <x:Type TypeName="local:KeycapType" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:KeycapTypeToStringVC x:Key="KeycapTypeToStringVC"/>
+            <u:KeycapTypeToStringVC x:Key="KeycapTypeToStringVC"/>
             <DataTemplate x:Key="KeycapTypeTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource KeycapTypeToStringVC}}" />
             </DataTemplate>
@@ -95,7 +97,7 @@
                     <x:Type TypeName="local:BitmapAccuracy" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:BitmapAccuracyToStringVC x:Key="BitmapAccuracyToStringVC"/>
+            <u:BitmapAccuracyToStringVC x:Key="BitmapAccuracyToStringVC"/>
             <DataTemplate x:Key="BitmapAccuracyTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource BitmapAccuracyToStringVC}}" />
             </DataTemplate>
@@ -105,7 +107,7 @@
                     <x:Type TypeName="local:AppExitMode" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:appexitmodeToStringVC x:Key="appexitmodeToStringVC"/>
+            <u:appexitmodeToStringVC x:Key="appexitmodeToStringVC"/>
             <DataTemplate x:Key="appexitmodeTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource appexitmodeToStringVC}}" />
             </DataTemplate>
@@ -115,7 +117,7 @@
                     <x:Type TypeName="local:ApplicationDetectionMode" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <EnumValueConverters:AppDetectionModeToStringVC x:Key="AppDetectionModeToStringVC"/>
+            <u:AppDetectionModeToStringVC x:Key="AppDetectionModeToStringVC"/>
             <DataTemplate x:Key="AppDetectionModeTemplate">
                 <TextBlock Text="{Binding Converter={StaticResource AppDetectionModeToStringVC}}" />
             </DataTemplate>
@@ -245,10 +247,6 @@
                     <TextBlock HorizontalAlignment="Left" Margin="10,11,0,0" TextWrapping="Wrap" Text="Preferred Keyboard:" VerticalAlignment="Top"/>
                     <ComboBox x:Name="devices_kb_brand" HorizontalAlignment="Left" Margin="160,8,0,0" VerticalAlignment="Top" Width="192" ItemsSource="{Binding Source={StaticResource KbBrand}}" ItemTemplate="{Binding Source={StaticResource KbBrandTemplate}}" SelectionChanged="devices_kb_brand_SelectionChanged"/>
                     <CheckBox x:Name="wrapper_allow_in_background_enabled" Content="Allow Aurora wrappers to take priority over desktop profile while active" HorizontalAlignment="Left" Margin="10,168,0,0" VerticalAlignment="Top" Unchecked="wrapper_allow_in_background_enabled_Checked" Checked="wrapper_allow_in_background_enabled_Checked"/>
-                    <CheckBox Content="Start AuroraChroma on Aurora launch" IsChecked="{Binding AuroraChromaOnLaunch}" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top" />
-                    <TextBlock Text="{Binding RunningText, Source={x:Static local:AuroraChromaService.Instance}}" Margin="270,191,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    <Button Content="Start" Command="{Binding StartCommand, Source={x:Static local:AuroraChromaService.Instance}}" Margin="370,191,0,0" Padding="4,1" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    <Button Content="Stop" Command="{Binding StopCommand, Source={x:Static local:AuroraChromaService.Instance}}" Margin="330,191,0,0" Padding="4,1" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     <Button x:Name="wrapper_install_logitech" Content="Install Aurora Wrapper Patch for Logitech" HorizontalAlignment="Left" Margin="546,220,0,0" VerticalAlignment="Top" Click="wrapper_install_logitech_Click"/>
                     <Button x:Name="wrapper_install_razer" Content="Install Aurora Wrapper Patch for Razer" HorizontalAlignment="Left" Margin="546,245,0,0" VerticalAlignment="Top" Click="wrapper_install_razer_Click"/>
                     <Button x:Name="wrapper_install_lightfx_32" Content="Install Aurora Wrapper Patch for LightFX (32 bit)" HorizontalAlignment="Left" Margin="546,171,0,0" VerticalAlignment="Top" Click="wrapper_install_lightfx_32_Click"/>
@@ -259,9 +257,9 @@
                     <ComboBox x:Name="ComboBox_virtualkeyboard_keycap_type" HorizontalAlignment="Left" Margin="160,108,0,0" VerticalAlignment="Top" Width="192" ItemsSource="{Binding Source={StaticResource KeycapType}}" ItemTemplate="{Binding Source={StaticResource KeycapTypeTemplate}}" SelectionChanged="ComboBox_virtualkeyboard_keycap_type_SelectionChanged"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,87,0,0" TextWrapping="Wrap" Text="Mouse Orientation:" VerticalAlignment="Top"/>
                     <ComboBox x:Name="devices_mouse_orientation" HorizontalAlignment="Left" Margin="160,83,0,0" VerticalAlignment="Top" Width="192" ItemsSource="{Binding Source={StaticResource MouseOrientation}}" ItemTemplate="{Binding Source={StaticResource MouseOrientationTemplate}}" SelectionChanged="devices_mouse_orientation_SelectionChanged"/>
-                    <CheckBox x:Name="devices_disable_keyboard_lighting" Content="Disable Keyboard Lighting" Margin="10,216,670,60" Checked="devices_disable_keyboard_lighting_Checked" Unchecked="devices_disable_keyboard_lighting_Checked" />
-                    <CheckBox x:Name="devices_disable_mouse_lighting" Content="Disable Mouse Lighting" Margin="10,240,670,35" Checked="devices_disable_mouse_lighting_Checked" Unchecked="devices_disable_mouse_lighting_Checked" />
-                    <CheckBox x:Name="devices_disable_headset_lighting" Content="Disable Headset Lighting" Margin="10,265,670,11" Checked="devices_disable_headset_lighting_Checked" Unchecked="devices_disable_headset_lighting_Checked" />
+                    <CheckBox x:Name="devices_disable_keyboard_lighting" Content="Disable Keyboard Lighting" Margin="10,192,670,0" Checked="devices_disable_keyboard_lighting_Checked" Unchecked="devices_disable_keyboard_lighting_Checked" />
+                    <CheckBox x:Name="devices_disable_mouse_lighting" Content="Disable Mouse Lighting" Margin="10,216,670,0" Checked="devices_disable_mouse_lighting_Checked" Unchecked="devices_disable_mouse_lighting_Checked" />
+                    <CheckBox x:Name="devices_disable_headset_lighting" Content="Disable Headset Lighting" Margin="10,240,670,0" Checked="devices_disable_headset_lighting_Checked" Unchecked="devices_disable_headset_lighting_Checked" />
                     <TextBlock HorizontalAlignment="Left" Margin="10,137,0,0" TextWrapping="Wrap" Text="Bitmap Accuracy/Ratio: " VerticalAlignment="Top" ToolTip="Determines how accurate the Freestyle key sequence option will map to the keys it is drawn over. Better accuracy comes at the cost of CPU/RAM usage, will likely only be a problem at Best"/>
                     <ComboBox x:Name="cmbBitmapAccuracy" HorizontalAlignment="Left" Margin="160,133,0,0" VerticalAlignment="Top" Width="192" ItemsSource="{Binding Source={StaticResource BitmapAccuracy}}" ItemTemplate="{Binding Source={StaticResource BitmapAccuracyTemplate}}" SelectedItem="{Binding BitmapAccuracy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -270,6 +268,54 @@
             <TabItem Header="Device Manager">
                 <Grid>
                     <Controls:Control_DeviceManager Margin="10"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="AuroraChroma">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <CheckBox Content="Start AuroraChroma on Aurora launch" IsChecked="{Binding AuroraChromaOnLaunch}" Margin="0,0,0,4" Grid.ColumnSpan="3" />
+
+                    <!-- Service Install -->
+                    <TextBlock Text="Service is currently:" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Margin="8,0" Grid.Row="1" />
+                    <TextBlock Text="{Binding ServiceInstalledText, Source={x:Static local:AuroraChromaService.Instance}}" Foreground="{Binding ServiceInstalled, Source={x:Static local:AuroraChromaService.Instance}, Converter={StaticResource BooleanToRedGreenConverter}}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" Margin="0,2">
+                        <Button Content="Install" Command="{Binding InstallUninstallCommand, Source={x:Static local:AuroraChromaService.Instance}}" CommandParameter="true" Margin="0,0,4,0" Padding="4,1" />
+                        <Button Content="Uninstall" Command="{Binding InstallUninstallCommand, Source={x:Static local:AuroraChromaService.Instance}}" CommandParameter="false" Padding="4,1" />
+                    </StackPanel>
+
+                    <!-- Service Running -->
+                    <TextBlock Text="{Binding RunningText, Source={x:Static local:AuroraChromaService.Instance}}" Foreground="{Binding Running, Source={x:Static local:AuroraChromaService.Instance}, Converter={StaticResource BooleanToRedGreenConverter}}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2" Margin="0,2">
+                        <Button Content="Start" Command="{Binding StartStopCommand, Source={x:Static local:AuroraChromaService.Instance}}" CommandParameter="true" Margin="0,0,4,0" Padding="4,1" />
+                        <Button Content="Stop" Command="{Binding StartStopCommand, Source={x:Static local:AuroraChromaService.Instance}}" CommandParameter="false" Padding="4,1" />
+                    </StackPanel>
+
+                    <!-- SDK Status -->
+                    <TextBlock Text="SDK is currently:" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Margin="8,0" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+                        <Run Text="{Binding SdkEnabledText, Source={x:Static u:RzSDKStatus.Instance}, Mode=OneWay}" Foreground="{Binding SdkEnabled, Source={x:Static u:RzSDKStatus.Instance}, Converter={StaticResource BooleanToRedGreenConverter}}" />
+                        <Run Text="(v" />
+                        <Run Text="{Binding SdkVersion, Source={x:Static u:RzSDKStatus.Instance}, Mode=OneWay}" />
+                        <Run Text=")" />
+                    </TextBlock>
+                    <Button Content="Download" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" Margin="0,2" Padding="4,1" Click="DownloadRazerSDK_Click" />
+
+
+                    <Button Content="Show AuroraChroma console" HorizontalAlignment="Left" Margin="0,2,0,0" Padding="4,1" Click="OpenAuroraChromaConsole_Click" Grid.Row="4" Grid.ColumnSpan="3" />
                 </Grid>
             </TabItem>
             <TabItem Header="Plugin Management">
@@ -313,6 +359,7 @@
                     <Button x:Name="btnShowLogsFolder" Content="Show Logs Folder" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Click="btnShowLogsFolder_Click"/>
                     <Button x:Name="btnShowGSILog" Content="Show GSI HTTP requests" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" Click="btnShowGSILog_Click" />
                     <CheckBox x:Name="chkHttpDebugTopMost" Content="Always on top" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" IsChecked="{Binding HttpDebugTopMost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Show AuroraChroma console" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" Click="OpenAuroraChromaConsole_Click" />
                     <Button Content="Record" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" IsEnabled="False" Visibility="Collapsed"/>
                 </Grid>
             </TabItem>
