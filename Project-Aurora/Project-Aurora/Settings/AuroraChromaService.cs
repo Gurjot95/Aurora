@@ -47,12 +47,17 @@ namespace Aurora.Settings {
         /// <summary>Method that should be called when Aurora initialises.</summary>
         public void Initialise() {
             // Get initial state of service
-            try { Running = controller.Status == ServiceControllerStatus.Running; }
-            catch { Running = false; }
+            UpdateStatus();
 
             // If the user wishes to start the service on launch, do so
             if (Global.Configuration.AuroraChromaOnLaunch)
                 Start();
+        }
+
+        /// <summary>Updates the running status of the service.</summary>
+        private void UpdateStatus() {
+            try { Running = controller.Status == ServiceControllerStatus.Running; }
+            catch { Running = false; }
         }
 
         /// <summary>
@@ -69,7 +74,7 @@ namespace Aurora.Settings {
             } catch (Exception ex) {
                 Global.logger.Error("Error trying to start AuroraChroma service: " + ex.Message);
             } finally {
-                Running = controller.Status == ServiceControllerStatus.Running;
+                UpdateStatus();
             }
             return false;
         }
@@ -88,7 +93,7 @@ namespace Aurora.Settings {
             } catch (Exception ex) {
                 Global.logger.Error("Error trying to stop AuroraChroma service: " + ex.Message);
             } finally {
-                Running = controller.Status == ServiceControllerStatus.Running;
+                UpdateStatus();
             }
             return false;
         }
