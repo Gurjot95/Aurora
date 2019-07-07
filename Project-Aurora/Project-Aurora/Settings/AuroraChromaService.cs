@@ -1,17 +1,39 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.ServiceProcess;
+using System.Configuration.Install;
 using System.Windows.Input;
+using System.Reflection;
 
 namespace Aurora.Settings {
     public class AuroraChromaService : INotifyPropertyChanged {
 
         /// <summary>The name of the AuroraChroma service.</summary>
-        private const string SERVICE_NAME = "MySQL80";
+        private const string SERVICE_NAME = "AuroraChroma";
+        //private const string EXEPATH = "\\"+ SERVICE_NAME;
 
         // Service manager singleton
         private static AuroraChromaService instance;
         public static AuroraChromaService Instance { get => instance ?? (instance = new AuroraChromaService()); }
+
+        // Check if service exists
+        private static bool isServiceExist()
+        {
+            return ServiceController.GetServices().Any(s => s.ServiceName == SERVICE_NAME);
+        }
+
+        //install service
+        private static void installService()
+        {
+            ManagedInstallerClass.InstallHelper(new[] { "/LogFile=", "/LogToConsole=true", AppDomain.CurrentDomain.BaseDirectory + SERVICE_NAME+".exe" });
+        }
+
+        private static void uninstallService()
+        {
+            ManagedInstallerClass.InstallHelper(new[] { "/u", "/LogFile=", "/LogToConsole=true", AppDomain.CurrentDomain.BaseDirectory + SERVICE_NAME+".exe" });
+        }
+
 
         /// <summary>Controller bound to the AuroraChroma service</summary>
         private ServiceController controller = new ServiceController(SERVICE_NAME);
@@ -33,6 +55,10 @@ namespace Aurora.Settings {
 
         /// <summary>Method that should be called when Aurora initialises.</summary>
         public void Initialise() {
+            if (!isServiceExist())
+            {
+                installService();
+            }
             // Get initial state of service
             Running = controller.Status == ServiceControllerStatus.Running;
 

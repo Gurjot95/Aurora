@@ -54,6 +54,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>documentation\Aurora.XML</DocumentationFile>
     <WarningLevel>3</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>..\..\Build\Release\</OutputPath>
@@ -69,6 +70,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <WarningLevel>3</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup />
@@ -187,6 +189,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
       <Private>True</Private>
@@ -1409,6 +1412,7 @@
     <Compile Include="Utils\KeyUtils.cs" />
     <Compile Include="Utils\MemoryReader.cs" />
     <Compile Include="Utils\MemoryUtils.cs" />
+    <Compile Include="Utils\RzHelper.cs" />
     <Compile Include="Utils\SteamUtils.cs" />
     <Compile Include="Utils\ThreadPriorityChanger.cs" />
     <Compile Include="Utils\Time.cs" />
@@ -1418,6 +1422,9 @@
     <Compile Include="Utils\UIUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AuroraChroma.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CorsairSDK\x64\CUESDK_2015.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
