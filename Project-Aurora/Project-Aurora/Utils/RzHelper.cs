@@ -46,6 +46,20 @@ namespace Aurora.Utils
         }
     }
 
+    /// <summary>
+    /// Singleton class proxy to access the RzHelper methods through WPF bindings easily.
+    /// </summary>
+    public class RzSDKStatus {
+        private static RzSDKStatus instance;
+        public static RzSDKStatus Instance => instance ?? (instance = new RzSDKStatus());
+
+        public RzSdkVersion SdkVersion { get; } = RzHelper.GetSdkVersion();
+        public bool SdkEnabled { get; } = RzHelper.IsSdkEnabled();
+        public string SdkEnabledText { get; } = RzHelper.IsSdkEnabled() ? "Enabled" : "Disabled";
+
+        private RzSDKStatus() { }
+    }
+
     public readonly struct RzSdkVersion
     {
         public readonly int Major;

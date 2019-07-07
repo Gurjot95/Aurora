@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Win32.TaskScheduler;
 using System.Windows.Data;
+using System.Globalization;
 
 namespace Aurora.Settings
 {
@@ -1074,5 +1075,18 @@ namespace Aurora.Settings
                 }
             }
         }
+
+        private void OpenAuroraChromaConsole_Click(object sender, RoutedEventArgs e) {
+            Process.Start(Path.Combine(Global.ExecutingDirectory, "AuroraChroma.exe"));
+        }
+
+        private void DownloadRazerSDK_Click(object sender, RoutedEventArgs e) {
+            Process.Start(new ProcessStartInfo("http://cdn.razersynapse.com/1559551158datmgXwXRazerChromaBroadcasterSetup_v3.4.0604.060316.exe"));
+        }
+    }
+
+    public class BooleanToRedGreenConverter : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (bool)value ? Brushes.Green : Brushes.Red;
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }
