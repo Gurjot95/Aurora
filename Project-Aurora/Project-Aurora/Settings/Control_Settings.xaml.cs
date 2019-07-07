@@ -965,17 +965,6 @@ namespace Aurora.Settings
             }
         }
 
-        private void btnShowAuroraChromaWindow_Click(object sender, RoutedEventArgs e)
-        {
-            try { 
-
-                 Process.Start("AuroraChroma.exe");
-            } catch(Exception)
-            {
-
-            }
-        }
-
         private void btnShowBitmapWindow_Click(object sender, RoutedEventArgs e)
         {
             if (winBitmapView == null)
@@ -1084,11 +1073,6 @@ namespace Aurora.Settings
                     task.RegisterChanges();
                 }
             }
-        }
-
-        private void BtnShowBitmapWindow_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
