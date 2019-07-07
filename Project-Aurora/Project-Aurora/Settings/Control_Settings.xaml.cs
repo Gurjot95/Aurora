@@ -1081,7 +1081,7 @@ namespace Aurora.Settings
         }
 
         private void DownloadRazerSDK_Click(object sender, RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo("http://cdn.razersynapse.com/1559551158datmgXwXRazerChromaBroadcasterSetup_v3.4.0604.060316.exe"));
+            Process.Start(new ProcessStartInfo("http://cdn.razersynapse.com/156092369797u1UA8NRazerChromaBroadcasterSetup_v3.4.0630.061913.exe"));
         }
     }
 
