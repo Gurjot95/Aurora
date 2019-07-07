@@ -283,6 +283,9 @@ namespace Aurora
                     }
                 }
 
+                // Once config loaded, see if user wants to start AuroraChroma service
+                AuroraChromaService.Instance.Initialise();
+
                 Global.logger.Info("Loading Plugins");
                 (Global.PluginManager = new PluginManager()).Initialize();
 
@@ -439,6 +442,10 @@ namespace Aurora
             Global.dev_manager?.Dispose();
 
             InputInterceptor?.Dispose();
+
+            // If AuroraChroma service is tied to Aurora lifetime, close it
+            if (Global.Configuration.AuroraChromaOnLaunch)
+                AuroraChromaService.Instance.Stop();
 
             try
             {
